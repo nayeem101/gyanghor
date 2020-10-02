@@ -1,0 +1,52 @@
+ <!-- sidebar -->
+ <div class="sidebar" id="sidebar">
+  <div class="custom-list" id="most-read">
+     <ul class="collection with-header">
+        <li class="collection-header center">
+           <h5>Most Read</h5>
+        </li>
+        <% if (typeof mostread !== "undefined") { %>
+         <% for(let i=0;i<mostread.length;i++) { %>
+          <a href="/<%= route %>/<%=mostread[i].id%>" title="<%= mostread[i].title %>"
+             class="collection-item"> <%= mostread[i].title.substring(0,25) %>...</a>
+         <% } %>
+        <% } %>
+     </ul>
+  </div>
+  <div class="custom-list" id="recent">
+     <ul class="collection with-header">
+        <li class="collection-header center">
+           <h5>Recent Uploads</h5>
+        </li>
+        <% for( let data of recents) { %>
+         <a href="/<%= route %>/<%=data.id%>" 
+            class="collection-item"> <%= data.title.substring(0,25) %>...</a>
+        <% } %>
+     </ul>
+  </div>
+
+  <!-- categories -->
+  <div class="custom-list" id="categories">
+     <div class="center categories-title">
+        <h5>Departemts</h5>
+     </div>
+     <ul class="collection" id="categories-list">
+        <a href="/ebooks/ICT" class="collection-item"> ICT </a>
+        <a href="/ebooks/CSE" class="collection-item"> CSE </a>
+        <a href="/ebooks/MATH" class="collection-item"> Mathematics </a>
+        <a href="/ebooks/PHYSICS" class="collection-item"> Physics </a>
+        <a href="/ebooks/CHE" class="collection-item"> Chemistry </a>
+        <a href="/ebooks/PHAR" class="collection-item"> Pharmacy </a>
+        <a href="/ebooks/STAT" class="collection-item"> Statstics </a>
+        <a href="/ebooks/ACC" class="collection-item"> Accounting </a>
+        <a href="/ebooks/FIN" class="collection-item"> Finance </a>
+        <a href="/ebooks/MARK" class="collection-item"> Marketing </a>
+        <a href="/ebooks/ENG" class="collection-item"> English </a>
+        <a href="/ebooks/LAW" class="collection-item"> Law </a>
+        <a href="/ebooks/JOUR" class="collection-item"> Journalism </a>
+        <a href="/ebooks/BNG" class="collection-item"> Bangla </a>
+        <a href="/ebooks/ANTHRO" class="collection-item"> Anthropology </a>
+        <a href="/ebooks/ARCH" class="collection-item"> Archeology </a>
+     </ul>
+  </div>
+</div>

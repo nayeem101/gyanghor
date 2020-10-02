@@ -1,0 +1,169 @@
+<%# header %> 
+<%- include ('../layouts/admin_header',{title:'Admin addebook',user:false}) -%>
+<!-- error message -->
+<%- include ('../partials/message') -%>
+<!-- navbar -->
+<%- include ('../partials/dash_nav') -%>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- sidebar -->
+    <%- include ('../partials/dash_sidebar.ejs') -%>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <!-- section title -->
+      <%- include ('../partials/dash_sec_title.ejs',{title:'Add new Ebook'}) -%>
+
+      <div class="p-1 bookForm">
+        <form action="/3U0bzsE9e1mQBuIW/addebook" method="post" class="myForm">
+          <label for="categories">Enter book Categories</label>
+          <div id="categories" class="form-row">
+            <div class="col">
+              <input
+                type="text"
+                name="category"
+                class="form-control myinput"
+                placeholder="Dept 1"
+                required
+              />
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                name="category"
+                class="form-control"
+                placeholder="Dept 2"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <label for="name">Book Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="enter book name"
+                required
+              />
+            </div>
+            <div class="col">
+              <label for="writer">Writer Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="writer"
+                name="writer"
+                placeholder="enter writer name"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <label for="pages">Pages no.</label>
+              <input
+                type="text"
+                class="form-control"
+                id="pages"
+                name="pages"
+                placeholder="enter page no"
+                required
+              />
+            </div>
+            <div class="col">
+              <label for="publisher">Publisher</label>
+              <input
+                type="text"
+                class="form-control"
+                id="publisher"
+                name="publisher"
+                placeholder="enter publisher name"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="link">Preview Link</label>
+            <input
+              type="text"
+              class="form-control"
+              id="link"
+              name="link"
+              placeholder="enter link"
+              required
+            />
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <label for="dlink">Download Link</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dlink"
+                name="dlink"
+                placeholder="enter link"
+                required
+              />
+            </div>
+            <div class="col-4">
+              <label for="language">Language</label>
+              <input
+                type="text"
+                class="form-control"
+                id="language"
+                name="language"
+                placeholder="enter language name"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="details">Book Details</label>
+            <textarea
+              class="form-control"
+              id="details"
+              name="details"
+              rows="3"
+            ></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>
+      <!-- table -->
+      <h2>Recently Added</h2>
+
+      <div class="table-responsive">
+        <table class="table table-striped table-hover table-sm">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Categories</th>
+              <th>Name</th>
+              <th>Writer</th>
+              <th>Pages</th>
+              <th>Publisher</th>
+              <th>Language</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for( ebook of ebooks) { %>
+            <tr>
+              <td><%= ebook.id %></td>
+              <td><%= ebook.category %></td>
+              <td><%= ebook.name %></td>
+              <td><%= ebook.writer %></td>
+              <td><%= ebook.pages %></td>
+              <td><%= ebook.publisher %></td>
+              <td><%= ebook.language %></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+
+<%# footer %> 
+<%- include ('../layouts/admin_footer') -%>

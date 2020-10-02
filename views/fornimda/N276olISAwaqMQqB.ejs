@@ -1,0 +1,62 @@
+<%# header %> 
+<%- include ('../layouts/admin_header',{title:'Admin Dashboard',user:false}) -%>
+
+<!-- error message -->
+<%- include ('../partials/message') -%>
+<!-- navbar -->
+<%- include ('../partials/dash_nav.ejs') -%>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- sidebar -->
+    <%- include ('../partials/dash_sidebar.ejs') -%>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <!-- section title -->
+      <%- include ('../partials/dash_sec_title.ejs',{title: 'Admin Dashboard'})
+      -%>
+
+      <!-- chart -->
+      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+
+      <!-- table -->
+      <h2>Users</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Fullname</th>
+              <th>Department</th>
+              <th>Session</th>
+              <th>Batch</th>
+              <th>Email Address</th>
+              <th>Mobile Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for( user of users) { %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= user.fullname %></td>
+              <td><%= user.department %></td>
+              <td><%= user.session %></td>
+              <td><%= user.batch %></td>
+              <td><%= user.email %></td>
+              <td><%= user.mobile %></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+<script
+  defer
+  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"
+></script>
+<script defer src="../javascripts/dashboard.js"></script>
+
+<%# footer %> 
+<%- include ('../layouts/admin_footer') -%>

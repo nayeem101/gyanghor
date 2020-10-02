@@ -1,0 +1,75 @@
+<%# header %> 
+<%- include ('../layouts/header',{title: 'Blogs'}) -%> 
+
+<!-- preloader -->
+<%- include ('../partials/preloader') -%> 
+<!-- top nav -->
+<%- include ('../partials/user_nav',{isLogedIn}) -%> 
+<!-- main nav -->
+<%- include ('../partials/user_navbar',{route:'blogs'}) -%> 
+
+<!-- blogs section-->
+<section id="blogs">
+  <!-- create post -->
+  <div class="container center-align" style="padding:1rem 0 .5rem">
+  <% if (isLogedIn) { %>
+      <a href='/blogs/create' class='btn btn-large waves-effect custom-color lighten-2'>Create Post</a>
+  <% } else {%>
+    <!-- Modal Trigger -->
+    <button data-target="modal1" 
+    class="btn modal-trigger btn-large waves-effect custom-color lighten-2">Create Post</button>
+    <!-- Modal Structure -->
+   <div id="modal1" class="modal custom-color">
+      <div class="modal-content white-text">
+         <h4>You have to log in first</h4>
+         <p>Press okay to go login page</p>
+      </div>
+      <div class="modal-footer custom-color lighten-3" style="text-align: center">
+         <a href="#!" class="modal-close btn-small custom-color lighten-3 white-text">Cancel</a>
+         <a href="/users/login" 
+            class="modal-close btn-small custom-color lighten-2 white-text"
+            title="login"
+            >Okay</a>
+      </div>
+   </div>
+  <% } %> 
+  </div>
+  <!-- all posts -->
+  <h4 class="center-align title-section">Blog Posts</h4>
+  <div class="container blog-container">
+     <div class="blogs">
+       <% for( let doc of data.docs ) { %>
+        <!-- single blog -->
+        <div class="single-blog">
+           <h5 class="blog-title"> <%= doc.title %>  </h5>
+           <div class="sub-title">
+              <p><i class="material-icons">account_circle</i> <%= doc.createdBy.author %>  </p>
+              <p><i class="material-icons">date_range</i> <%= doc.createdAt.toDateString() %>  </p>
+           </div>
+           <p class="blog-desc">
+              <%= doc.description %> 
+           </p>
+           <div class="btn-container">
+              <a href="/blogs/<%= doc.id %>"
+                 class="btn waves-effect waves-light details"
+              >Details</a>
+           </div>
+        </div>
+       <% } %>
+       
+     </div>
+     <!-- end of blog -->
+     <!-- sidebar -->
+<%- include ('../partials/user_sidebar',{recents:data.recents, mostread: data.mostRead, route:'blogs'} ) -%> 
+
+  </div>
+</section>
+
+<!-- paginate -->
+<%- include ('../partials/user_paginate',{pages: data.pages}) -%> 
+
+<%# contact %>
+<%- include ('../partials/user_contact') -%> 
+
+<%# footer %> 
+<%- include ('../layouts/footer') -%> 

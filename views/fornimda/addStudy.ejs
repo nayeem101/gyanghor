@@ -1,0 +1,233 @@
+<%- include ('../layouts/admin_header',{title:'Admin Add Study Materials',user:false}) -%>
+
+<!-- navbar -->
+<%- include ('../partials/dash_nav.ejs') -%>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- sidebar -->
+    <%- include ('../partials/dash_sidebar.ejs') -%>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <!-- section title -->
+      <%- include ('../partials/dash_sec_title.ejs',{title:'Add Study Materials'})-%>
+
+      <div class="p-1">
+        <!-- error message -->
+        <%- include ('../partials/message') -%>
+
+        <form action="/3U0bzsE9e1mQBuIW/addStudy" method="post" accept-charset="utf-8">
+          <div class="form-row">
+            <label for="category">Categories (dept name in comma seperated) </label>
+            <input
+              type="text"
+              class="form-control"
+              id="category"
+              name="category"
+              placeholder="ICT,CSE,..."
+            />
+          </div>
+          
+          <!-- web links -->
+          <hr>
+          <h4>Add resourceful Website Links</h4>
+          <div id="weblinks">
+            <div class="form-row wlinks">
+              <div class="col-6">
+                <label>Website Title</label>
+                <input
+                  type="text"
+                  name="weblinks[1][title]"
+                  class="form-control"
+                  placeholder="Geeksforgeeks"
+                />
+              </div>
+              <div class="col-6">
+                <label>Website Links</label>
+                <input
+                  type="text"
+                  name="weblinks[1][link]"
+                  class="form-control"
+                  placeholder="https://geekforgeeks.com"
+                />
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-info btn-sm my-2" id="addLink">Add More Links</button>
+
+          <!-- study materials -->
+          <hr />
+          <h4>Add Study Materials for subjects</h4>
+          <div id="studyMat">
+            <div class="col-12 studies">
+              <div class="form-group">
+                <label for="subname">Subject Name 1</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="subname"
+                  name="subjects[1][subname]"
+                  placeholder="Data Structures"
+                />
+              </div>
+              <div class="form-row">
+                <div class="col-4">
+                  <label>Video Playlist Title (1)</label>
+                  <input
+                    type="text"
+                    id="vtitle"
+                    name="subjects[1][videolink][title]"
+                    class="form-control"
+                    placeholder="enter the title of video playlist"
+                  />
+                </div>
+                <div class="col-6">
+                  <label>Video Playlist Link (1)</label>
+                  <input
+                    type="text"
+                    id="vlink"
+                    name="subjects[1][videolink][link]"
+                    class="form-control"
+                    placeholder="https://youtube.com/playlist?list=fsfsdf"
+                  />
+                </div>
+                <div class="col-2">
+                  <label>Total Videos in playlist</label>
+                  <input
+                    type="number"
+                    id="vtotal"
+                    name="subjects[1][videolink][total]"
+                    class="form-control"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-info btn-sm my-2" id="addSubject">Add subject</button>
+
+          <!-- submit btn -->
+          <button class="d-block my-2 w-25 btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>
+
+      <!-- table -->
+      <h2>Recently Added</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover table-sm">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Categories</th>
+              <th>Video Links</th>
+              <th>Web Links</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for( data of studyData) { %>
+              <tr>
+                <td><%= data.id %></td>
+                <td><%= data.category %></td>
+                <td><%= data.subjects.length %></td>
+                <td><%= data.weblinks.length %></td>
+              </tr>
+              <% } %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  function btnFunction(btn, container, optionfor) {
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+      let option = createNewOpton(optionfor);
+      container.appendChild(option);
+    });
+  }
+  function createNewOpton(optionfor) {
+    let div = document.createElement("div");
+    let input;
+    if (optionfor === "weblinks") {
+      let count = document.querySelectorAll(".wlinks").length + 1;
+      input = `<div class="col-6">
+              <label>Website Title ${count}</label>
+              <input
+                type="text"
+                name="weblinks[${count}][title]"
+                class="form-control myinput"
+                placeholder="Geeksforgeeks"
+              />
+            </div>
+            <div class="col-6">
+              <label>Website Links ${count}</label>
+              <input
+                type="text"
+                name="weblinks[${count}][title]"
+                class="form-control myinput"
+                placeholder="https://geekforgeeks.com"
+              />
+            </div>`;
+      div.className = "form-row wlinks";
+    } else if (optionfor === "studyMat") {
+      let count = document.querySelectorAll(".studies").length + 1;
+      input = `<hr><div class="form-group">
+                <label for="subname${count}">Subject Name ${count}</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="subname${count}"
+                  name="subjects[${count}][subname]"
+                  placeholder="Data Structures"
+                />
+              </div>
+              <div class="form-row">
+                <div class="col-4">
+                  <label>Video Playlist Title (${count})</label>
+                  <input
+                    type="text"
+                    name="subjects[${count}][videolink][title]"
+                    class="form-control"
+                    placeholder="enter the title of video playlist"
+                  />
+                </div>
+                <div class="col-6">
+                  <label>Video Playlist Link (${count})</label>
+                  <input
+                    type="text"
+                    name="subjects[${count}][videolink][link]"
+                    class="form-control"
+                    placeholder="https://youtube.com/playlist?list=fsfsdf"
+                  />
+                </div>
+                <div class="col-2">
+                  <label>Total Videos in playlist (${count})</label>
+                  <input
+                    type="number"
+                    id="vtotal"
+                    name="subjects[${count}][videolink][total]"
+                    class="form-control"
+                    placeholder="0"
+                  />
+                </div>
+              </div>`;
+      div.className = "col-12 studies";
+    }
+    div.innerHTML = input;
+    return div;
+  }
+
+  //add new link
+  let weblinks = document.getElementById("weblinks");
+  let addLink = document.getElementById("addLink");
+  btnFunction(addLink, weblinks, "weblinks");
+  //add new subject
+  let studyMaterials = document.getElementById("studyMat");
+  let addSubject = document.getElementById("addSubject");
+  btnFunction(addSubject, studyMaterials, "studyMat");
+</script>
+
+<!-- footer -->
+<%- include ('../layouts/admin_footer') -%>

@@ -1,0 +1,64 @@
+<%# header %> 
+<%- include ('../layouts/header',{title: "Study Materials"}) -%> 
+
+<!-- preloader -->
+<%- include ('../partials/preloader') -%> 
+<%# top nav %> 
+<%- include ('../partials/user_nav') -%> 
+<!-- main nav -->
+<%- include ('../partials/user_navbar',{route:'study'}) -%> 
+
+<!-- skill develop container -->
+<section id="single-study">
+  <h4 class="center title-section"> <%= deptName.name %>  </h4>
+  <div class="container subject-container">
+     <div class="video-links">
+        <div class="custom-title">
+           <h5>Video Lectures Links</h5>
+        </div>
+
+        <% if (allSubjects.length === 0) { %>
+         <h6 class='red-text center'>No video lectures available! Will be added soon.</h6>
+        <% } %>
+
+        <ul class="links">
+           <% for (let sub of allSubjects) {%> 
+           <li>
+              <i class="material-icons">book</i>
+              <a href="<%= sub.videolink.link %>" target="_blank" 
+               title="<%= sub.videolink.title %>"> <%= sub.subname %> </a>
+              <span class="right">1 Playlist -- <%= sub.videolink.total %> Videos</span>
+           </li>
+         <% } %> 
+        </ul>
+     </div>
+     <div class="website-links">
+        <div class="custom-title">
+           <h5>Resourceful Websites for ICT</h5>
+        </div>
+
+        <% if (allWebLinks.length === 0) { %>
+         <h6 class='red-text center'>No website links available! Will be added soon.</h6>
+        <% } %>
+
+        <ul class="links">
+         <% for (let weblink of allWebLinks) {%> 
+           <li>
+              <i class="material-icons">web</i>
+              <a href="<%= weblink.link %>" target="_blank">
+                 <%= weblink.title %> 
+                 <i class="material-icons right">open_in_new</i>
+              </a>
+           </li>
+         <% } %> 
+        </ul>
+     </div>
+  </div>
+</section>
+<!-- end ebook container -->
+
+<%# contact %>
+<%- include ('../partials/user_contact') -%> 
+
+<%# footer %> 
+<%- include ('../layouts/footer') -%> 

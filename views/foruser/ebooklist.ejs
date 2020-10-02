@@ -1,0 +1,46 @@
+<%# header %> 
+<%- include ('../layouts/header',{title: 'ebooks'}) -%> 
+
+<!-- preloader -->
+<%- include ('../partials/preloader') -%> 
+<!-- topnav -->
+<%- include ('../partials/user_nav') -%> 
+<!-- main nav -->
+<%- include ('../partials/user_navbar',{route:'ebooks'}) -%> 
+ 
+<!-- ebook container -->
+<section id="ebooks-section">
+  <h4 class="center-align title-section"> <%= data.deptName %> </h4>
+  <div class="ebooks-container">
+     <div class="ebooks">
+        <% for( let ebook of data.docs ) { %>
+        <!-- single book -->
+        <div class="ebook-card">
+          <div class="ebook-img center">
+             <img src="/images/book.svg" alt="eBook" class="responsive-img" />
+          </div>
+          <div class="ebook-body center">
+             <h4> <%= ebook.name %> </h4>
+             <h5>Writer: <%= ebook.writer %>  </h5>
+             <p>Category: <%= ebook.category %>  </p>
+             <p>Pages: <%= ebook.pages %> </p>
+             <a href="./singlebook/<%= ebook.id %>" 
+              class="btn waves-effect waves-light">Details</a>
+          </div>
+       </div>
+        <% } %>
+     </div>
+  <!-- sidebar -->
+  <% let recents = data.recents.map(book =>{return {id:book.id, title:book.name} })%> 
+  <%- include ('../partials/user_sidebar',{recents,route:'ebooks/singlebook'}) -%> 
+  </div>
+</section>
+
+<%# paginate %> 
+<%- include ('../partials/user_paginate',{pages: data.pages}) -%> 
+
+<%# contact %>
+<%- include ('../partials/user_contact') -%> 
+
+<%# footer %> 
+<%- include ('../layouts/footer') -%> 

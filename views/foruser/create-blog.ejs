@@ -1,0 +1,119 @@
+<%# header %> 
+<%- include ('../layouts/admin_header.ejs',{title: 'Create Blog',user: true}) -%> 
+
+<!-- preloader -->
+<%- include ('../partials/preloader') -%> 
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" 
+    style="background-color: #0b0333 !important">
+  <div class="container">
+   <a class="navbar-brand" href="/"> 
+    <img src="/images/logo.png" alt="gyanghor" style="width:80px"> জ্ঞানঘর</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarToggler">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-right">
+      <li class="nav-item active">
+        <a class="nav-link px-3" href="/"> <i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class='nav-link px-3 text-white' href="/ebooks"><i class="fa fa-book"></i> eBooks</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link px-3" href="/blogs">
+          <i class="fa fa-newspaper"></i>
+          Blogs
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link px-3 text-white" href="/journals">
+          <i class="fas fa-journal-whills"></i>
+          Journals
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link px-3 text-white" href="/study">
+          <i class="fas fa-book-reader"></i>
+          Study Materials
+        </a>
+      </li>
+    </ul>
+    <span style="color: #ffffff; margin-right: 1rem;" title="user"><i class="icon-user"></i> <%= username %> </span>
+    <form class="form-inline my-2 my-lg-0" action="/users/logout" method="POST">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<!-- create post -->
+<div class="container p-3" id="create-post">
+  <!-- error message -->
+  <%- include ('../partials/message') -%> 
+  <div class="row">
+    <form class="col s12" 
+      <% if (typeof editPost !== 'undefined') { %>
+        action = "/blogs/update/<%= blog.id %>"
+      <% } else {%> 
+        action = "/blogs/create"
+      <% } %>  method="POST" >
+          <div class="form-group">
+            <label for="title">Blog Title</label>
+            <input class='form-control' type="text" name="title" id="title" placeholder="give a title" 
+            value="<%= typeof editPost !== 'undefined'? blog.title : '' %>" required />
+          </div>
+
+          <div class="form-group">
+            <label for="category">Blog Category (Comma Separated Value)</label>
+            <input class='form-control' type="text" name="category" id="category" placeholder="ex: category1,category2" 
+            value="<%= typeof editPost !== 'undefined' ? blog.category: '' %>" required />
+          </div>
+
+          <div class="form-group">
+            <label for="desc">Blog Description</label>
+            <textarea class="form-control" id="desc" name="description" rows="3" placeholder="about the blog" required
+            ><%= typeof editPost !== 'undefined' ? blog.description: '' -%></textarea>
+          </div>
+     
+          <div class="form-group">
+            <label for="editor">Start writing the blog here</label>
+            <textarea name="details" id="editor">
+              <% if (typeof editPost !== 'undefined') { %>
+                <%- blog.details -%> 
+              <% } %>
+            </textarea>
+          </div>
+    
+         <button type="submit" class='btn btn-primary'>Submit</button>
+         <% if (typeof editPost !== 'undefined') { %>
+           <a href="/blogs/<%= blog.id %> " class="btn btn-secondary">Cancle</a>
+         <% } else {%>
+          <a href="/blogs" class="btn btn-secondary">Cancle</a>
+          <% } %> 
+    </form>
+  </div>
+</div>
+
+<!-- footer -->
+<footer class='text-center text-white py-3' style="background:#0b0333;">
+  <h4> &copy;জ্ঞানঘর - Comillla University - 2020 </h4> 
+  <p>Developed & Maintained by <a href="#!" title="Comilla University IT Society">CoUITS</a></p> 
+</footer>
+
+<script src="/javascripts/ckeditor/ckeditor.js"></script>
+
+<script type="text/javascript">
+  window.onload = function () {
+    CKEDITOR.replace('editor', {
+    "extraPlugins" : 'imagebrowser',
+    "imageBrowser_listUrl" : "/files"
+  });
+  };
+</script>
+
+<%# footer %> 
+<%- include ('../layouts/admin_footer.ejs') -%>

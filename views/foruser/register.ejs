@@ -1,0 +1,191 @@
+<%# header %> 
+<%- include ('../layouts/admin_header',{title:'user register', user:true}) -%>
+
+<!-- preloader -->
+<%- include ('../partials/preloader') -%> 
+<div style="background-color:#181841;">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body" id="myCard">
+      <div class="container text-center">
+        <h2><a href="/" class="whitish-text" title="home">জ্ঞানঘর</a></h2>
+        <h4>জ্ঞানের আলোয় আলোকিত</h4>
+      </div>
+      <h4 class="text-center mb-3">
+        <i class="fas fa-user-plus"></i> Register
+      </h4>
+      <%- include ('../partials/message') -%>
+      <form
+        action="/users/register"
+        name="register"
+        method="POST"
+        onsubmit="return vaidation()"
+      >
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="firstname">Firstname</label>
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              class="form-control"
+              placeholder="Enter Firstname"
+              required
+              value="<%= typeof firstname != 'undefined' ? firstname : '' %>"
+            />
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="lastname">Lastname</label>
+            <input
+              type="text"
+              id="lastname"
+              name="lastname"
+              class="form-control"
+              placeholder="Enter Lastname"
+              required
+              value="<%= typeof lastname != 'undefined' ? lastname : '' %>"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="department">Department</label>
+          <input
+            type="text"
+            id="department"
+            name="department"
+            class="form-control"
+            placeholder="ICT"
+            required
+            value="<%= typeof department != 'undefined' ? department : '' %>"
+          />
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="batch">Batch (Versity)</label>
+            <input
+              type="text"
+              id="batch"
+              name="batch"
+              class="form-control"
+              placeholder="9th"
+              required
+              value="<%= typeof batch != 'undefined' ? batch : '' %>"
+            />
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="session">Session</label>
+            <input
+              type="text"
+              id="session"
+              name="session"
+              class="form-control"
+              placeholder="2017-18"
+              required
+              value="<%= typeof session != 'undefined' ? session : '' %>"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required
+              placeholder="iamns@xyz.com"
+              value="<%= typeof email != 'undefined' ? email : '' %>"
+            />
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="mobile">Mobile Number</label>
+            <input
+              type="text"
+              id="mobile"
+              name="mobile"
+              class="form-control"
+              required
+              placeholder="0180xxxxxxx"
+              value="<%= typeof mobile != 'undefined' ? mobile : '' %>"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              class="form-control"
+              placeholder="Create Password"
+              value="<%= typeof password != 'undefined' ? password : '' %>"
+            />
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="password2">Confirm Password</label>
+            <input
+              type="password"
+              id="password2"
+              name="password2"
+              required
+              class="form-control"
+              placeholder="Confirm Password"
+              value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Register
+        </button>
+      </form>
+      <p class="lead">Have An Account? <a href="/users/login">Login</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.1.0/validator.min.js"></script>
+<script>
+  function vaidation() {
+    let card = document.getElementById("myCard");
+    let form = document.forms["register"];
+    let email = form["email"].value;
+    let mobile = form["mobile"].value;
+
+    if (validator.isEmail(email)) {
+      return true;
+    } else {
+      var err_msg = document.createElement("div");
+      err_msg.classList = "alert alert-warning alert-dismissible";
+      err_msg.setAttribute("role", "alert");
+      err_msg.innerHTML = `Email is invalid. Give a correct one.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>`;
+      card.insertBefore(err_msg, form);
+      return false;
+    }
+
+    if (validator.isMobilePhone(value, "bn-bd")) {
+      return true;
+    } else {
+      var err_msg = document.createElement("div");
+      err_msg.classList = "alert alert-warning alert-dismissible";
+      err_msg.setAttribute("role", "alert");
+      err_msg.innerHTML = `Mobile Number is invalid. Give a correct one.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>`;
+      card.insertBefore(err_msg, form);
+      return false;
+    }
+  }
+</script>
+<%# footer %> 
+<%- include ('../layouts/admin_footer') -%>

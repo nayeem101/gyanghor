@@ -1,0 +1,33 @@
+<!-- nav with login register -->
+<div id="tnav" class="navbar-fixed z-depth-3">
+  <nav class="custom-color lighten-1 scrollspy" id="tnav">
+    <div class="nav-wrapper container">
+      <a href="/" class="brand-logo" style="display: inline-flex;align-items: center;"
+       title="home page"><img src="/images/logo.png" alt='জ্ঞানঘর' style="width:80px">জ্ঞানঘর</a>
+      
+       <a href="#" data-target="mobile-nav" class="sidenav-trigger right">
+        <i class="material-icons">menu</i>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <% if (isLogedIn) { %>
+          <li style="margin-right: 1rem; font-size:1.2rem;" title="user">
+            <i class='icon-user left' style="line-height:45px;margin-right: 5px;"></i><%= typeof username !== "undefined" ? username : "" %> 
+          </li>
+          <li>
+            <form action="/users/logout" method="POST">
+              <button class="btn custom-color lighten-3 waves-effect" type="submit"> Log Out</button>
+            </form>
+          </li>
+        <% } else {%>        
+          <li>
+            <a href="/users/login" class="btn waves-effect waves-light blue darken-2 white-text"
+              >Log in</a>
+          </li>
+          <li>
+            <a href="/users/register" class="btn waves-effect blue darken-4">Register</a>
+          </li>
+        <% } %> 
+      </ul>
+    </div>
+  </nav>
+</div>

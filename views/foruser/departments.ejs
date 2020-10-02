@@ -1,0 +1,40 @@
+<%# header %> 
+<%- include ('../layouts/header',{title:'Study Materials'}) -%> 
+
+<!-- preloader -->
+<%- include ('../partials/preloader') -%> 
+<%# partials %> 
+<%- include ('../partials/user_nav',{isLogedIn}) -%> 
+<!-- main nav -->
+<%- include ('../partials/user_navbar',{route}) -%> 
+
+<!-- ebook container -->
+<section id="study-section">
+  <h4 class="center-align title-section">Departments</h4>
+  <div class="container departments">
+    <% for(let dept of departments ) { %>
+      <div class="department">
+        <img class="responsive-img" 
+          src="/images/depts/<%= dept.shortName.toLowerCase() %>.png" alt="<%= dept.name %>" />
+        <div class="dept-body">
+          <h5><%= dept.name %></h5>
+          <% if (route === 'ebooks') { %>
+            <p>Ebooks: <%= dept.totalBooks %></p>
+          <% } else{%>
+            <p>Video Lecture Playlists</p>
+            <p>Resourceful Links</p>
+          <% } %> 
+
+          <a href="/<%= route %>/<%= dept.shortName %>" 
+            class="btn waves-effect waves-light">View</a>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%# contact %>
+<%- include ('../partials/user_contact.ejs') -%> 
+
+<%# footer %> 
+<%- include ('../layouts/footer') -%> 

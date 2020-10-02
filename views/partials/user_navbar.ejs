@@ -1,0 +1,89 @@
+<!-- main nav -->
+<div class="hide-on-med-and-down">
+  <nav class="custom-color">
+    <div class="container">
+      <div class="nav-wrapper">
+        <ul class="right hide-on-med-and-down" id="mynav">
+          <li class="<%= route === 'home' ? 'active' :'link'%>" >
+            <a href="/">Home <i class="material-icons left">home</i> </a>
+          </li>
+          <li class="<%= route === 'ebooks' ? 'active' :'link'%>">
+            <a href="/ebooks">eBooks <i class="material-icons left">book</i></a>
+          </li>
+          <li class="<%= route === 'blogs' ? 'active' :'link'%>">
+            <a href="/blogs">Blogs <i class="material-icons left">web</i></a>
+          </li>
+          <li class="<%= route === 'journals' ? 'active' :'link'%>">
+            <a href="/journals"><i class="material-icons left">source</i> Journals </a>
+          </li>
+          <li class="<%= route === 'study' ? 'active' :'link'%>">
+            <a href="/study">
+              <i class="material-icons left">local_library</i>Study Materials
+            </a>
+          </li>
+          <li>
+            <a href="#!" onclick="smoothScrollBottom('#contact-section')"
+              ><i class="material-icons left">contact_support</i>
+              Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+<!-- mobile nav -->
+<ul class="sidenav" id="mobile-nav">
+  <li class="center no-hover custom-color" style="line-height:1">
+    <a href="/" id="mylogo" style="display: inline-flex;" title="home page">
+      <img src="/images/logo.png" alt='জ্ঞানঘর' style="width:80px">জ্ঞানঘর</a>
+  </li>
+  
+  <!-- login & register or logout -->
+  <% if (isLogedIn) { %>
+    <li style="font-size:1.2rem; text-align: center;" title="user" class="no-hover white-text">
+      <i class='icon-user' style="line-height:45px;margin-right: 10px;"></i><%= typeof username !== "undefined" ? username : "" %> 
+    </li>
+    <li class='no-hover center-align'>
+      <form action="/users/logout" method="POST">
+        <button class="btn custom-color lighten-3 waves-effect" style="width:60%" type="submit"> Log Out</button>
+      </form>
+    </li>
+  <% } else {%>
+    <li class="no-hover">
+      <a href="/users/login" class="btn waves-effect blue darken-2">Log in</a>
+    </li>
+    <li class="no-hover">
+      <a href="/users/register" class="btn waves-effect blue darken-4">Register</a>
+    </li>
+  <% } %> 
+  
+  <li class="<%= route === 'home' ? 'active' :'link'%>">
+    <a href="/">Home <i class="material-icons left">home</i> </a>
+  </li>
+  <li class="<%= route === 'ebooks' ? 'active' :'link'%>">
+    <a href="/ebooks">eBooks <i class="material-icons left">book</i></a>
+  </li>
+  <li class="<%= route === 'blogs' ? 'active' :'link'%>">
+    <a href="/blogs">Blogs <i class="material-icons left">web</i></a>
+  </li>
+  <li class="<%= route === 'journals' ? 'active' :'link'%>">
+    <a href="/journals">
+      <i class="material-icons left">chrome_reader_mode</i> Journals
+    </a>
+  </li>
+  <li class="<%= route === 'study' ? 'active' :'link'%>">
+    <a href="/study">
+      <i class="material-icons left">local_library</i>
+      Study Materials
+    </a>
+  </li>
+  <li>
+    <a href="#!" onclick="smoothScrollBottom('#contact-section')" class="sidenav-close"
+      ><i class="material-icons left">contact_support</i>
+      Contact
+    </a>
+  </li>
+</ul>

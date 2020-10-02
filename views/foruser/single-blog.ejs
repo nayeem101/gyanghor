@@ -1,0 +1,155 @@
+<!-- header -->
+<%- include ('../layouts/header',{title: 'Blogs', route:'blogs'}) -%>
+
+<!-- preloader -->
+<%- include ('../partials/preloader') -%> 
+<!-- top nav -->
+<%- include ('../partials/user_nav') -%>
+<!-- main nav -->
+<%- include ('../partials/user_navbar',{route:'blogs'}) -%>
+
+<!-- blog container -->
+<section id="single-blog">
+  <div class="container single-blog-container">
+    <div class="blogs">
+      <div class="single-blog">
+        <h5 class="blog-title"><%= blog.title -%></h5>
+        <div class="sub-title">
+          <p title='Author'><i class="material-icons">account_circle</i> <%= blog.createdBy.author -%></p>
+          <p title='Created At'>
+            <i class="material-icons">date_range</i> <%= blog.createdAt.toDateString() -%>
+          </p>
+          <p title='Category'><i class="material-icons">assignment</i> <%= blog.category -%></p>
+
+          <% if (typeof editPost !== 'undefined' && editPost) { %>
+            <p style="float: right">
+              <a href="/blogs/edit/<%= blog.id %>" title="edit" 
+                onclick="return confirm('Want to Edit this blog?')"
+                ><i class="material-icons">edit</i></a>
+              
+              <a href="/blogs/delete/<%= blog.id %>" title="delete" style="margin-left: 1rem;"
+                onclick="return confirm('Sure to delete this blog?')"
+                ><i class="material-icons">delete</i></a>
+            </p>
+          <% } %>
+
+        </div>
+        <div class="blog-details"><%- blog.details -%></div>
+      </div>
+    </div>
+
+    <!-- glider -->
+    <div class="slider-container">
+      <h5 class="center slider-title">Read Similar Blogs</h5>
+        <% if (similarBlogs.length === 0) { %>
+         <h6 class='center red-text'>No similar blogs found!</h6>
+        <% } %>
+      <div class="glider-contain">
+        <div class="glider">
+          <% for( blog of similarBlogs ) { %>
+          <div class="similar-blog">
+            <div class="similar-blog-head">
+              <img class="responsive-img" src="/images/carbon.png" alt="similar-blog" />
+              <h5 class="blog-title"><%= blog.title.substring(0, 55) %>...</h5>
+            </div>
+            <div class="similar-blog-body">
+              <div class="sub-title">
+                <p><i class="material-icons">account_circle</i> <%= blog.createdBy.author %></p>
+                <p>
+                  <i class="material-icons">date_range</i> <%=
+                  blog.createdAt.toDateString() -%>
+                </p>
+              </div>
+              <p class="blog-desc"><%= blog.description.substring(0,100) %>...</p>
+              <div class="btn-container center">
+                <a href="/blogs/<%= blog.id %> " class="btn waves-effect waves-light">
+                  Read
+                </a>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+
+        <button aria-label="Previous" class="glider-prev">«</button>
+        <button aria-label="Next" class="glider-next">»</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- contact section -->
+<%- include ('../partials/user_contact') -%>
+
+<script>
+  let images = document.querySelectorAll(".blog-details img");
+  images.forEach((img) => {
+    img.className = "responsive-img";
+    img.style.height = "auto";
+  });
+  let head1 = document.querySelectorAll(".blog-details h1");
+  head1.forEach(h1=>{
+     h1.setAttribute("style","font-size:1.7rem !important; margin: .5rem 0; line-height:110%")
+  })
+  let head2 = document.querySelectorAll(".blog-details h2");
+  head2.forEach(h2=>{
+     h2.setAttribute("style","font-size:1.54rem !important; margin: .5rem 0; line-height:110%")
+  })
+  let head3 = document.querySelectorAll(".blog-details h3");
+  head3.forEach(h3=>{
+     h3.setAttribute("style","font-size:1.34rem !important; margin: .5rem 0; line-height:100%")
+  })
+  let paragraph = document.querySelectorAll('.blog-details p');
+  paragraph.forEach(p=>{
+     p.className = 'blog-desc'
+  })
+  let codes = document.querySelectorAll('.blog-details div code');
+
+  codes.forEach(code=>{
+     code.style.color = '#181841'
+  })
+
+  let containers = document.querySelectorAll('.blog-details div');
+  containers.forEach(container=>{
+    container.setAttribute("style","color:#181841;font-size:1.125rem; background: #fefefe; border: 1px solid #cccccc;padding: 5px 10px;")
+  })
+
+</script>
+
+<!-- glider js -->
+<script src="/javascripts/glider.min.js"></script>
+<script>
+   new Glider(document.querySelector(".glider"), {
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      itemWidth: 200,
+      draggable: true,
+      arrows: {
+         prev: ".glider-prev",
+         next: ".glider-next",
+      },
+      responsive: [
+         {
+            // screens greater than >= 775px
+            breakpoint: 600,
+            settings: {
+               slidesToShow: 2,
+               slidesToScroll: 1,
+               duration: 0.5,
+            },
+         },
+         {
+            // screens greater than >= 1024px
+            breakpoint: 1024,
+            settings: {
+               slidesToShow: 3,
+               slidesToScroll: 2,
+               itemWidth: 150,
+               duration: 0.5,
+            },
+         },
+      ],
+   });
+</script>
+
+<%# footer %> <%- include ('../layouts/footer') -%>

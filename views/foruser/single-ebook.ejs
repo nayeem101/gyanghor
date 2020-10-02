@@ -1,0 +1,134 @@
+<%# header %> 
+<%- include ('../layouts/header',{title: 'ebook', route:'ebooks'}) -%> 
+
+<!-- preloader -->
+<%- include ('../partials/preloader') -%> 
+<%# top nav %> 
+<%- include ('../partials/user_nav') -%> 
+<!-- main nav -->
+<%- include ('../partials/user_navbar',{route:'ebooks'}) -%> 
+
+<!-- ebook section-->
+<div class="ebook-container">
+  <div id="ebook-single">
+    <div class="ebook-image">
+      <img src="/images/book.svg" class="responsive-img" />
+    </div>
+
+    <div class="ebook-content">
+      <h4> <%= ebook.name %> </h4>
+      <h5>Writer: <%= ebook.writer %></h5>
+      <p>Category: <%= ebook.category %></p>
+      <p>Pages: <%= ebook.pages %></p>
+      <p>Publisher: <%= ebook.publisher %></p>
+      <p>Language: <%= ebook.language %></p>
+      <p>
+        Details: <br />
+        <%= ebook.details %>
+      </p>
+      <a href="<%= ebook.link %>" target="_blank" class="btn waves-effect waves-light custom-color lighten-2">
+        Read
+      </a>
+      <a href="<% if (ebook.dlink) { %>
+       <%= ebook.dlink %> 
+      <% } %>" target="_blank" class="btn waves-effect waves-light custom-color lighten-4">
+        Download
+      </a>
+    </div>
+  </div>
+  
+   <!-- categories -->
+   <div class="categories">
+    <div class="center categorie-title">
+       <h5>Departments</h5>
+    </div>
+    <ul class="collection" id="categorie-lists">
+        <a href="/ebooks/ICT" class="collection-item"> ICT </a>
+        <a href="/ebooks/CSE" class="collection-item"> CSE </a>
+        <a href="/ebooks/MATH" class="collection-item"> Mathematics </a>
+        <a href="/ebooks/PHY" class="collection-item"> Physics </a>
+        <a href="/ebooks/CHE" class="collection-item"> Chemistry </a>
+        <a href="/ebooks/PHA" class="collection-item"> Pharmacy </a>
+        <a href="/ebooks/STAT" class="collection-item"> Statstics </a>
+        <a href="/ebooks/ACC" class="collection-item"> Accounting </a>
+        <a href="/ebooks/FIN" class="collection-item"> Finance </a>
+        <a href="/ebooks/MARK" class="collection-item"> Marketing </a>
+        <a href="/ebooks/ENG" class="collection-item"> English </a>
+        <a href="/ebooks/LAW" class="collection-item"> Law </a>
+        <a href="/ebooks/JOUR" class="collection-item"> Journalism </a>
+        <a href="/ebooks/BNG" class="collection-item"> Bangla </a>
+        <a href="/ebooks/ANTHRO" class="collection-item"> Anthropology </a>
+        <a href="/ebooks/ARCH" class="collection-item"> Archeology </a>
+     </ul>
+ </div>
+</div>
+
+<!-- card slider -->
+<div class="container slider-container">
+  <h5 class="center slider-title">Read Similar Books</h5>
+  <div class="glider-contain">
+     <div class="glider">
+       <% for (book of related) {%> 
+        <div class="ebook-card">
+           <div class="ebook-img center">
+              <img src="/images/book.svg" alt="eBook" class="responsive-img" />
+           </div>
+           <div class="ebook-body center">
+              <h4> <%= book.name %>  </h4>
+              <h5>Writer: <%= book.writer %> </h5>
+              <p>Category: <%= book.category %> </p>
+              <p>Pages: <%= book.pages %></p>
+              <a href="/ebooks/singlebook/<%= book.id %>" 
+                class="btn waves-effect waves-light"
+                 >Details</a>
+           </div>
+        </div>
+      <% } %> 
+     </div>
+
+     <button aria-label="Previous" class="glider-prev">«</button>
+     <button aria-label="Next" class="glider-next">»</button>
+  </div>
+</div>
+
+<%# contact %>
+<%- include ('../partials/user_contact') -%> 
+
+<!-- glider js -->
+<script src="/javascripts/glider.min.js"></script>
+<script>
+   new Glider(document.querySelector(".glider"), {
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      itemWidth: 200,
+      draggable: true,
+      arrows: {
+         prev: ".glider-prev",
+         next: ".glider-next",
+      },
+      responsive: [
+         {
+            // screens greater than >= 775px
+            breakpoint: 600,
+            settings: {
+               slidesToShow: 2,
+               slidesToScroll: 1,
+               duration: 0.5,
+            },
+         },
+         {
+            // screens greater than >= 1024px
+            breakpoint: 1024,
+            settings: {
+               slidesToShow: 3,
+               slidesToScroll: 2,
+               itemWidth: 150,
+               duration: 0.5,
+            },
+         },
+      ],
+   });
+</script>
+
+<%# footer %> 
+<%- include ('../layouts/footer') -%> 

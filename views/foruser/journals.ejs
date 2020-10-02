@@ -1,0 +1,63 @@
+<!-- header -->
+<%- include ('../layouts/header',{title:'Journals'}) -%> 
+<!-- preloader -->
+<%- include ('../partials/preloader') -%> 
+<!-- top nav  -->
+<%- include ('../partials/user_nav',{isLogedIn}) -%> 
+<!-- main nav -->
+<%- include ('../partials/user_navbar',{route:'journals'}) -%> 
+
+ <section id="journals">
+  <h4 class="center-align title-section">Journals</h4>
+  <div class="container journal-container">
+     <% for( let journal of data.docs ) { %>
+      <!-- single journal -->
+     <div class="single-journal">
+        <div class="img-container">
+           <img
+              class="responsive-img"
+              src="<%= journal.image ? journal.image: '/images/nayeem.jpg' %>"
+              alt="nayeem"
+              title="<%= journal.author %>"
+           />
+        </div>
+        <div class="journal-body">
+           <h5 class="journal-title"><%= journal.title %></h5>
+           <p><span>Type:</span> <%= journal.type %></p></p>
+           <p><span>By:</span> <%= journal.author %> (Batch: <%= journal.authorBatch %>) </p></p>
+           <p><span>Occupation:</span> <%= journal.occupation %></p>
+           <p><span>Publised in:</span> <%= journal.journalName %> </p>
+           <p><span>Publised at:</span> <%= journal.publishedAt.toDateString() %></p>
+           <div class="btn-container">
+              <a href="<%= journal.journalLink %>" target="_blank" title='Read Journal'
+                class="btn waves-effect waves-light read-btn">Read</a>
+
+             <span class="social-media">
+                Connect Author 
+                <% for (let social of journal.socialLinks) {%>
+                  <% if (social.link.length !==0) { %>  
+                     <a href="<%= social.link %>" target='_blank' 
+                        class="btn waves-effect custom-color lighten-3" 
+                        style="font-size:1.5rem;" title="<%= social.media %> profile" >
+                        <i class="icon-social-<%= social.media %>"></i>
+                     </a>
+                  <% } %>
+               <% } %> 
+             </span>
+           </div>
+        </div>
+     </div>
+     <% } %>
+    
+  </div>
+</section>
+
+
+<!-- paginition -->
+<%- include ('../partials/user_paginate',{pages: data.pages}) -%> 
+
+<!-- contact -->
+<%- include ('../partials/user_contact') -%> 
+
+<!-- footer -->
+<%- include ('../layouts/footer') -%> 

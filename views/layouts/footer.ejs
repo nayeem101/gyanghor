@@ -1,0 +1,40 @@
+<!-- script materialize -->
+<script>
+  window.addEventListener('load', (event) => {
+    console.log(event);
+    const loader = document.querySelector('.loader');
+    loader.classList.add('hidden');
+  })
+</script>
+<script src="/javascripts/materialize.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    //sidenav
+    var sidenav = document.querySelector(".sidenav");
+    M.Sidenav.init(sidenav, {});
+    //collapsible
+    var collapsible = document.querySelectorAll(".collapsible");
+    M.Collapsible.init(collapsible, {accordion: true });
+    //slider
+    var slide = document.querySelectorAll('.slider');
+    M.Slider.init(slide, {indicators : true});
+    //modal
+    var modal = document.querySelectorAll('.modal');
+    M.Modal.init(modal, {});
+    //carousel
+    var carousel = document.querySelectorAll('.carousel');
+    M.Carousel.init(carousel, {});
+
+    //show scroll btn
+    window.addEventListener("scroll", function () {
+      var scroll = document.querySelector(".scrollTop");
+      /* if (window.pageYOffset > 250) {
+        scroll.classList.add("showBtn");
+      } else scroll.classList.remove("showBtn"); */
+      scroll.classList.toggle("showBtn", window.pageYOffset > 250);
+    });
+  });
+</script>
+<script src="/javascripts/smoothScroll.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<%# header %> 
+<%- include ('../layouts/admin_header',{title:'Admin addebook',user:false}) -%>
+
+<!-- navbar -->
+<%- include ('../partials/dash_nav') -%>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- sidebar -->
+    <%- include ('../partials/dash_sidebar') -%>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <!-- error message -->
+      <%- include ('../partials/message') -%>
+      <!-- section title -->
+      <%- include ('../partials/dash_sec_title.ejs',{title:'Add new Journal'}) -%>
+
+      <div class="p-1">
+        <form action="/3U0bzsE9e1mQBuIW/addJournal" method="post" class="myForm" enctype="multipart/form-data">
+
+          <div class="form-row">
+            <div class="col">
+              <label for="title">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                placeholder="enter title"
+                required
+              />
+            </div>
+            <div class="col">
+              <label for="type">Enter Type</label>
+              <select class="form-control" id="type" name="type">
+                <option> Journal </option>
+                <option> Research Paper </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <label for="author">Written By</label>
+              <input
+                type="text"
+                class="form-control"
+                id="author"
+                name="author"
+                placeholder="enter writer name with batch"
+                required
+              />
+            </div>
+            <div class="col">
+              <label for="fileinput" class="d-block">Upload author image</label>
+              <input type="file" name="author-img" id="fileinput">
+          </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="col">
+              <label for="authorBatch">Versity Batch</label>
+              <input
+                type="text"
+                class="form-control"
+                id="authorBatch"
+                name="authorBatch"
+                placeholder="ex: 12th"
+                required
+              />
+            </div>
+            <div class="col">
+              <label for="occupation">Occupation</label>
+              <input
+                type="text"
+                class="form-control"
+                id="occupation"
+                name="occupation"
+                placeholder="enter writer occupation"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-4">
+              <label for="journalName"> Publisher Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="journalName"
+                name="journalName"
+                placeholder="enter publisher name"
+                required
+              />
+            </div>
+            <div class="col-8">
+              <label for="journalLink">Journal Link</label>
+              <input
+                type="text"
+                class="form-control"
+                id="journalLink"
+                name="journalLink"
+                placeholder="enter link of journal or research paper"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-4">
+              <label for="socialLinkfb">Facebook profile link</label>
+              <input
+                type="text"
+                class="form-control"
+                id="socialLinkfb"
+                name="socialLinks"
+                placeholder="Author's facebook profile link"
+              />
+            </div>
+            <div class="col-4">
+              <label for="socialLinkli">LinkedIn profile link</label>
+              <input
+                type="text"
+                class="form-control"
+                id="socialLinkli"
+                name="socialLinks"
+                placeholder="Author's LinkedIn profile link"
+              />
+            </div>
+            <div class="col-4">
+              <label for="socialLinkgh">Github profile link</label>
+              <input
+                type="text"
+                class="form-control"
+                id="socialLinkgh"
+                name="socialLinks"
+                placeholder="Author's github profile link"
+              />
+            </div>
+          </div>
+   
+          <button class="btn btn-primary mt-2" type="submit">Submit</button>
+        </form>
+      </div>
+      <!-- table -->
+      <h2>Recently Added</h2>
+
+      <div class="table-responsive">
+        <table class="table table-striped table-hover table-sm">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Written By</th>
+              <th>Occupation</th>
+              <th>Published In</th>
+              <th>Published At</th>
+              <th></th>
+            </tr>
+          </thead>
+          <% if (typeof journals !== 'undefined') { %>
+            <tbody>
+              <% for( journal of journals) { %>
+              <tr>
+                <td><%= journal.id %></td>
+                <td><%= journal.title %></td>
+                <td><%= journal.type %></td>
+                <td><%= journal.by %></td>
+                <td><%= journal.occupation %></td>
+                <td><%= journal.journalName %></td>
+                <td><%= journal.publishedAt %></td>
+                <td> 
+                  <form method="POST" action="/3U0bzsE9e1mQBuIW/journals/<%= journal.id %>"
+                    onsubmit="return confirm('Sure to delete this journal?');">
+                    <button class="btn btn-secondary"> Delete </button>
+                  </form> 
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          <% } %>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+
+<%# footer %> 
+<%- include ('../layouts/admin_footer') -%>

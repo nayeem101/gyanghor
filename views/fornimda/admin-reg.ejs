@@ -1,0 +1,72 @@
+<%# header %> 
+<%- include ('../layouts/admin_header',{title:'Admin Register',user:false}) -%>
+
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body" id="myCard">
+      <h1 class="text-center mb-3">
+        <i class="fas fa-user-plus"></i> Add an Admin
+      </h1>
+      <%- include ('../partials/message') -%>
+      <form action="/3U0bzsE9e1mQBuIW/register" name="register" method="POST">
+        <div class="form-group">
+          <label for="name">Userame</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-control"
+            placeholder="Enter Name"
+            required
+            value="<%= typeof username != 'undefined' ? username : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            class="form-control"
+            required
+            placeholder="Enter Full Name"
+            value="<%= typeof fullname != 'undefined' ? fullname : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            class="form-control"
+            placeholder="Create Password"
+            value="<%= typeof password != 'undefined' ? password : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password2">Confirm Password</label>
+          <input
+            type="password"
+            id="password2"
+            name="password2"
+            required
+            class="form-control"
+            placeholder="Confirm Password"
+            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          Register
+        </button>
+      </form>
+      <p class="lead mt-4">
+        Admin login <a href="/3U0bzsE9e1mQBuIW/ByRVZOXPZsitU9oF">Login</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<%# footer %> 
+<%- include ('../layouts/admin_footer') -%>

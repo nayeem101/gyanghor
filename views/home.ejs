@@ -1,0 +1,159 @@
+<%# header %> 
+<%- include ('./layouts/header',{title: "Home", route:'home'}) -%> 
+
+<!-- preloader -->
+<%- include ('./partials/preloader') -%> 
+<%# top nav %> 
+<%-include ('./partials/user_nav') -%>
+<!-- main nav -->
+<%- include ('./partials/user_navbar',{route:'home'}) -%>
+
+<!-- slide -->
+<section class="section section-slider center deep-blue">
+  <div class="slider">
+    <ul class="slides" id="myslide">
+      <li>
+        <img src="images/bgbook1.jpg" alt="images" />
+        <div class="caption right-align">
+          <h4>
+            “Good friends, good books, and a sleepy conscience: this is the ideal life.”
+          </h4>
+          <h5>― Mark Twain</h5>
+        </div>
+      </li>
+      <li>
+        <img src="images/bgbook3.jpg" alt="images" />
+        <div class="caption left-align">
+          <h4>
+            “If you only read the books that everyone else is reading, you can only think
+            what everyone else is thinking.”
+          </h4>
+          <h5>― Haruki Murakami</h5>
+        </div>
+      </li>
+      <li>
+        <img src="images/bgbook2.jpg" alt="slider background" />
+        <div class="caption center-align">
+          <h4>
+            “Only the very weak-minded refuse to be influenced by literature and poetry.”
+          </h4>
+          <h5>― Cassandra Clare</h5>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- departments -- ebooks -->
+<section id="departments" class="custom-color lighten-1">
+   <div class="container slider-container">
+      <h5 class="center slider-title">All Departments</h5>
+      <div class="glider-contain">
+        <div class="glider departments">
+          <% for( dept of depts ) { %>
+            <div class="department" style="border: 1px dotted #f3f3f3;margin: 0 .5rem;">
+               <img class="responsive-img" 
+               src="/images/depts/<%= dept.shortName.toLowerCase() %>.png" alt=<%= dept.name %>   />
+               <div class="dept-body">
+                  <h5><%= dept.name %></h5>
+                  <p>Ebooks: <%= dept.totalBooks %></p>
+                  <a href="/ebooks/<%= dept.shortName %>" 
+                   class="btn waves-effect waves-light">View</a>
+               </div>
+             </div>
+          <% } %>
+        </div>
+
+        <button aria-label="Previous" class="glider-prev">«</button>
+        <button aria-label="Next" class="glider-next">»</button>
+      </div>
+    </div>
+</section>
+
+<!-- features -->
+<section class="section section-features center custom-color">
+  <div class="container">
+      <h4 class="title-section">Features</h4>
+      <div class="row white-text">
+          <div class="col s12 m4">
+              <div class="card-panel whitish  myCard ">
+                  <i class="material-icons medium">book</i>
+                  <h5 class="title-section title-section">eBooks</h5>
+                  <p>Download ebooks of your prefered subjects</p>
+              </div>
+          </div>
+          <div class="col s12 m4">
+              <div class="card-panel whitish myCard">
+                  <i class="material-icons medium">web</i>
+                  <h5 class="title-section">Journals</h5>
+                  <p>Read journals written by CoU Graduates</p>
+              </div>
+          </div>
+          <div class="col s12 m4">
+            <div class="card-panel whitish myCard">
+                <i class="material-icons medium">web</i>
+                <h5 class="title-section">Blogs</h5>
+                <p>Read or write blogs about different topics</p>
+            </div>
+        </div>
+      </div>
+      <div class="row white-text">
+          <div class="col s12 m6">
+            <div class="card-panel whitish myCard">
+              <i class="material-icons medium">import_contacts</i>
+              <h5 class="title-section">Research Papers</h5>
+              <p>Papers from CoU Graduates of many topics</p>
+            </div>
+          </div>
+          <div class="col s12 m6">
+              <div class="card-panel whitish myCard">
+                  <i class="material-icons medium">local_library</i>
+                  <h5 class="title-section">Study Materials</h5>
+                  <p>Get video playlists of subjects & resourceful website links</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<%# contact section %> 
+<%- include ('./partials/user_contact') -%> 
+
+<!-- glider js -->
+<script src="/javascripts/glider.min.js"></script>
+<script>
+   new Glider(document.querySelector(".glider"), {
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      itemWidth: 200,
+      draggable: true,
+      arrows: {
+         prev: ".glider-prev",
+         next: ".glider-next",
+      },
+      responsive: [
+         {
+            // screens greater than >= 775px
+            breakpoint: 600,
+            settings: {
+               slidesToShow: 2,
+               slidesToScroll: 1,
+               duration: 0.5,
+            },
+         },
+         {
+            // screens greater than >= 1024px
+            breakpoint: 1024,
+            settings: {
+               slidesToShow: 4,
+               slidesToScroll: 2,
+               itemWidth: 150,
+               duration: 0.5,
+            },
+         },
+      ],
+   });
+</script>
+
+<%# footer %> 
+<%-include ('./layouts/footer') -%>

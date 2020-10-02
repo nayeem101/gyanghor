@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <title>Gyanghor -- <%= title %>  </title>
+    <!-- CSS only -->
+      <!-- /* preloader */ -->
+    <style>
+      .loader{position:fixed;z-index:99999;top:0;left:0;width:100%;height:100%;background-color:#0b0a1f;display:flex;justify-content:center;align-items:center}.loader h2{color:#b6d463!important}#light{animation:light 2s ease-in-out infinite;-webkit-animation:light 2s ease-in-out infinite}.ray{animation:flicker4 3s ease-in-out 1s infinite;-webkit-animation:flicker4 3s ease-in-out 1s infinite}.book{fill:green}#text{animation:fadeInText 3s ease-in-out infinite;-webkit-animation:fadeInText 3s ease-in-out infinite}#text span{animation:fadeInText 1s linear alternate infinite;-webkit-animation:fadeInText 1s linear alternate infinite}@keyframes light{0%{fill:#ff0}25%{fill:#dfec27}50%{fill:#c28513}75%{fill:#dd9c23}100%{fill:#dfec27}}@keyframes flicker4{0%{fill:#ff005d;box-shadow:0 0 4px #ff005d}30%{fill:#ff005d;box-shadow:0 0 4px #ff005d}37%{fill:#12000a;box-shadow:0 0 4px #12000a}41%{fill:#12000a;box-shadow:0 0 4px #12000a}60%{fill:#ff0;box-shadow:0 0 4px #ff005d}85%{fill:#ff005d;box-shadow:0 0 4px #ff005d}86%{fill:#12000a;box-shadow:0 0 4px #12000a}95%{fill:#12000a;box-shadow:0 0 4px #12000a}96%{fill:#ff005d;box-shadow:0 0 4px #ff005d}100%{fill:#ff005d;box-shadow:0 0 4px #ff005d}}@keyframes color{50%{fill:red;stroke:green}}@keyframes fadeInText{1%{color:#12000a;text-shadow:0 0 4px #12000a}70%{color:#ff005d;text-shadow:0 0 14px #ff005d}100%{color:#ff005d;text-shadow:0 0 4px #ff005d}}.loader.hidden{animation:fadeOut 1s forwards;-webkit-animation:fadeOut 1s forwards}@keyframes fadeOut{100%{opacity:0;visibility:hidden}}
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <!-- simple icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
+    />
+    <!-- Custom styles for this template -->
+    <% if (!user) { %>
+      <link href="../stylesheets/dashboard.css" rel="stylesheet" />
+    <% } %>
+  </head>
+<body>
