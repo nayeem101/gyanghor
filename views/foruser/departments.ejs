@@ -1,5 +1,5 @@
 <%# header %> 
-<%- include ('../layouts/header',{title:'Study Materials'}) -%> 
+<%- include ('../layouts/header',{title:route}) -%> 
 
 <!-- preloader -->
 <%- include ('../partials/preloader') -%> 
@@ -10,10 +10,11 @@
 
 <!-- ebook container -->
 <section id="study-section">
-  <h4 class="center-align title-section">Departments</h4>
-  <div class="container departments">
+  <h4 class="center-align title-section"
+  ><%= route === 'ebooks' ? 'Ebooks of' : 'Study Materials of' %>  Departments</h4>
+  <div class="container departments" >
     <% for(let dept of departments ) { %>
-      <div class="department">
+    <div class="department" >
         <img class="responsive-img" 
           src="/images/depts/<%= dept.shortName.toLowerCase() %>.png" alt="<%= dept.name %>" />
         <div class="dept-body">
@@ -33,8 +34,11 @@
   </div>
 </section>
 
+<%# paginate %> 
+<%- include ('../partials/user_paginate',{pages, page}) -%> 
+
 <%# contact %>
 <%- include ('../partials/user_contact.ejs') -%> 
 
 <%# footer %> 
-<%- include ('../layouts/footer') -%> 
+<%- include ('../layouts/footer',{route: "depts"}) -%> 

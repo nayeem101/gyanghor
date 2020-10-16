@@ -12,7 +12,8 @@
       <ul class="collection">
         <li class="collection-item">
           <i class="icon-map"></i>
-          <a href="#"> Address: Salmanpur, Comilla</a>
+          <a href="https://goo.gl/maps/KcV3avJ29w9w4F549" target="_blank" 
+          title="Google map location"> Address: Comilla University, Salmanpur, Comilla</a>
         </li>
 
         <li class="collection-item">
@@ -25,7 +26,8 @@
         </li>
         <li class="collection-item">
           <i class="icon-globe"></i>
-          <a href="https://cou.ac.bd" target="_blank">Website: CoU Official Website</a>
+          <a href="https://cou.ac.bd" target="_blank" 
+          title="Comilla University">Website: CoU Official Website</a>
         </li>
       </ul>
     </div>
@@ -46,7 +48,7 @@
       </a>
     </div>
 
-    <div class="card-panel deep-blue" id="thoughts">
+    <div class="card-panel deep-blue hide-on-med-only" id="thoughts">
       <h5 class="white-text">Share your Thoughts</h5>
       <div class="input-field white-text">
         <input type="text" placeholder="Name" />
@@ -69,5 +71,14 @@
 </section>
 <!-- footer -->
 <footer class="section custom-color lighten-1 white-text center">
-  <h5 class="white-text">জ্ঞানঘর-কুবি &copy; <%= new Date().getFullYear()%> </h5>
+  <% if (typeof route !== 'undefined' && route !=='home') { %>
+    <h4 style="color: #7fcac9;font-size: 1.2rem;" 
+      >Developed with <span style='color:red'>&#10084</span> by 
+      <a href="https://github.com/nayeem101" target="_blank" title="ICT 12th">Nayeem</a> 
+    </h4>
+  <% } %>
+  <div class="footer-info" style="display:flex; justify-content:center;align-items:center">
+    <img src="/images/logo.png" alt="জ্ঞানঘর" style="width:65px;height: 40px;">
+    <h5 class="white-text" style="margin:0.5rem 0;">জ্ঞানঘর-কুবি &copy; <%= new Date().getFullYear()%> </h5>
+  </div>
 </footer>

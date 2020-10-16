@@ -11,10 +11,42 @@
 <!-- ebook container -->
 <section id="ebooks-section">
   <h4 class="center-align title-section"> <%= data.deptName %> </h4>
-  <div class="ebooks-container">
+   <div class="search-box container">
+      <form action="/ebooks/<%= data.dept %>" method="get" autocomplete="off" class="search-form">
+         <label for="myInput"> Search ebooks for <%= data.dept %> </label>
+         <div id='search-wrapper'>
+            <span> <i class="material-icons">search</i> </span>
+            <div class="autocomplete">
+               <input type="text" id="myInput" placeholder="enter book name" name="title">
+            </div>
+            <span id="clear" title="clear input"> <i class="material-icons">clear</i> </span>
+         </div>
+         <input type="submit" id='searchBtn' class='btn custom-color lighten-4' value="Search">
+      </form>
+
+         <%# semesters %>
+      <div class="semdropdown hide-on-large-only hide-on-extra-large-only">
+         <a href="#" class='dropdown-trigger btn custom-color lighten-2 waves-effect' data-target='semesters2'>
+            Filter by Semester <i class="material-icons">arrow_drop_down</i>
+         </a>
+         <ul class="dropdown-content" id="semesters2">
+            <li> <a href='#!' title='first' class=" semester"> 1st Semester</a> </li>
+            <li> <a href='#!' title='second' class=" semester"> 2nd Semester</a> </li>
+            <li> <a href='#!' title='third' class=" semester"> 3rd Semester</a> </li>
+            <li> <a href='#!' title='fourth' class=" semester"> 4th Semester</a> </li>
+            <li> <a href='#!' title='fifth' class=" semester"> 5th Semester</a> </li>
+            <li> <a href='#!' title='sixth' class=" semester"> 6th Semester</a> </li>
+            <li> <a href='#!' title='seventh' class=" semester"> 7th Semester</a> </li>
+            <li> <a href='#!' title='eighth' class=" semester"> 8th Semester</a> </li>
+         </ul>
+      </div>   
+   </div>
+   <h4 class="center-align title-section" id="semester" 
+      style="text-transform: capitalize;">All Semesters</h4>
+   
+   <div class="ebooks-container">
      <div class="ebooks">
         <% for( let ebook of data.docs ) { %>
-        <!-- single book -->
         <div class="ebook-card">
           <div class="ebook-img center">
              <img src="/images/book.svg" alt="eBook" class="responsive-img" />
@@ -23,6 +55,7 @@
              <h4> <%= ebook.name %> </h4>
              <h5>Writer: <%= ebook.writer %>  </h5>
              <p>Category: <%= ebook.category %>  </p>
+             <p>Semester: <%= ebook.semester !== undefined ? ebook.semester : "not specified" %>  </p>
              <p>Pages: <%= ebook.pages %> </p>
              <a href="./singlebook/<%= ebook.id %>" 
               class="btn waves-effect waves-light">Details</a>
@@ -32,15 +65,80 @@
      </div>
   <!-- sidebar -->
   <% let recents = data.recents.map(book =>{return {id:book.id, title:book.name} })%> 
-  <%- include ('../partials/user_sidebar',{recents,route:'ebooks/singlebook'}) -%> 
+  <%- include ('../partials/user_sidebar',{dept: data.dept, recents, route:'ebooks'}) -%> 
   </div>
 </section>
 
 <%# paginate %> 
-<%- include ('../partials/user_paginate',{pages: data.pages}) -%> 
+<%- include ('../partials/user_paginate',{pages: data.pages, page: data.page}) -%> 
 
 <%# contact %>
 <%- include ('../partials/user_contact') -%> 
+<!-- filter by semester -->
+<script>
+   window.addEventListener('DOMContentLoaded',()=>{
+      const container = document.querySelector('.ebooks');
+      const btns = document.querySelectorAll('.semester');
+      const title = document.querySelector('.title-section');
+      const semesterName = document.getElementById('semester');
 
+      function clearPage() {
+        let ebooks = document.querySelectorAll('.ebook-card');
+        ebooks.forEach(ebook=>{
+           container.removeChild(ebook);
+        })
+        let errors = document.querySelectorAll('.error');
+        if(errors.length > 0){
+           errors.forEach(err=>err.parentNode.removeChild(err))
+        } 
+        let paginition = document.getElementById('paginition');
+        paginition.style.display = 'none';
+      }
+
+      let getEbooks = async (semester)=>{
+         let url = `/ebooks/semesters/<%= data.dept %>/${semester}`;
+         let response = await fetch(url);
+         let data = await response.json();
+
+         if(data.hasOwnProperty('message')){ 
+            clearPage();
+            let err_msg = document.createElement('div');
+            err_msg.setAttribute('style', "color:red;text-align:center;font-size:1.2rem");
+            err_msg.className = 'error';
+            err_msg.innerHTML = data.message + ' <a href="/ebooks/<%= data.dept %>">Back</a>';
+            container.parentNode.insertAdjacentElement('beforebegin', err_msg);
+         }else{
+            clearPage();
+            data.forEach(ebook=>{
+               container.innerHTML += 
+                  `<div class="ebook-card">
+                     <div class="ebook-img center">
+                     <img src="/images/book.svg" alt="eBook" class="responsive-img" />
+                     </div>
+                     <div class="ebook-body center">
+                        <h4> ${ebook.name} </h4>
+                        <h5>Writer: ${ebook.writer}  </h5>
+                        <p>Category: ${ebook.category}  </p>
+                        <p>Semester: ${ebook.semester}  </p>
+                        <p>Pages: ${ebook.pages} </p>
+                        <a href="./singlebook/${ebook._id}"" 
+                        class="btn waves-effect waves-light">Details</a>
+                     </div>
+                  </div>` 
+            })
+         }
+      }
+
+      btns.forEach(btn => {
+         btn.addEventListener('click',(event)=>{
+            event.preventDefault();
+            let semester = event.target.getAttribute('title');
+            semesterName.innerHTML = `${semester} Semester <a href='/ebooks/<%= data.dept %>'> (Go back) </a>`;
+            let a = document.createElement('a');
+            getEbooks(semester);
+         })
+      })
+   })
+</script>
 <%# footer %> 
-<%- include ('../layouts/footer') -%> 
+<%- include ('../layouts/footer', {route:'ebooks',dept: data.dept}) -%> 

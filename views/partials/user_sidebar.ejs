@@ -1,25 +1,46 @@
  <!-- sidebar -->
  <div class="sidebar" id="sidebar">
-  <div class="custom-list" id="most-read">
-     <ul class="collection with-header">
-        <li class="collection-header center">
-           <h5>Most Read</h5>
-        </li>
-        <% if (typeof mostread !== "undefined") { %>
-         <% for(let i=0;i<mostread.length;i++) { %>
-          <a href="/<%= route %>/<%=mostread[i].id%>" title="<%= mostread[i].title %>"
-             class="collection-item"> <%= mostread[i].title.substring(0,25) %>...</a>
+  <% if (route === 'blogs') { %>
+   <div class="custom-list" id="most-read">
+      <ul class="collection with-header">
+         <li class="collection-header center">
+            <h5>Most Read</h5>
+         </li>
+         <% if (typeof mostread !== "undefined") { %>
+          <% for(let i=0;i<mostread.length;i++) { %>
+           <a href="/<%= route %>/<%=mostread[i].id%>" title="<%= mostread[i].title %>"
+              class="collection-item"> <%= mostread[i].title.substring(0,25) %>...</a>
+          <% } %>
          <% } %>
-        <% } %>
-     </ul>
-  </div>
-  <div class="custom-list" id="recent">
+      </ul>
+   </div>
+  <% } else {%>
+   <%# semesters %>
+   <div class="hide-on-med-and-down semdropdown">
+      <a href="#" class='dropdown-trigger btn custom-color lighten-2 waves-effect' data-target='semesters'>
+         Filter by Semester <i class="material-icons">arrow_drop_down</i>
+      </a>
+      <ul class="dropdown-content" id="semesters">
+         <li> <a href='#!' title='first' class=" semester"> 1st Semester</a> </li>
+         <li> <a href='#!' title='second' class=" semester"> 2nd Semester</a> </li>
+         <li> <a href='#!' title='third' class=" semester"> 3rd Semester</a> </li>
+         <li> <a href='#!' title='fourth' class=" semester"> 4th Semester</a> </li>
+         <li> <a href='#!' title='fifth' class=" semester"> 5th Semester</a> </li>
+         <li> <a href='#!' title='sixth' class=" semester"> 6th Semester</a> </li>
+         <li> <a href='#!' title='seventh' class=" semester"> 7th Semester</a> </li>
+         <li> <a href='#!' title='eighth' class=" semester"> 8th Semester</a> </li>
+      </ul>
+   </div> 
+  <% } %> 
+
+  <!-- recent posts -->
+  <div class="<%= route ==='ebooks' ? 'custom-list hide-on-small-and-down' : 'custom-list' %> " id="recent">
      <ul class="collection with-header">
         <li class="collection-header center">
            <h5>Recent Uploads</h5>
         </li>
         <% for( let data of recents) { %>
-         <a href="/<%= route %>/<%=data.id%>" 
+         <a href="/<%= route %>/<%=data.id%>" title="<%= data.title %>"
             class="collection-item"> <%= data.title.substring(0,25) %>...</a>
         <% } %>
      </ul>
@@ -28,25 +49,14 @@
   <!-- categories -->
   <div class="custom-list" id="categories">
      <div class="center categories-title">
-        <h5>Departemts</h5>
+        <h5><%= route ==='blogs' ? 'Categories' : 'Departemts'%></h5>
      </div>
-     <ul class="collection" id="categories-list">
-        <a href="/ebooks/ICT" class="collection-item"> ICT </a>
-        <a href="/ebooks/CSE" class="collection-item"> CSE </a>
-        <a href="/ebooks/MATH" class="collection-item"> Mathematics </a>
-        <a href="/ebooks/PHYSICS" class="collection-item"> Physics </a>
-        <a href="/ebooks/CHE" class="collection-item"> Chemistry </a>
-        <a href="/ebooks/PHAR" class="collection-item"> Pharmacy </a>
-        <a href="/ebooks/STAT" class="collection-item"> Statstics </a>
-        <a href="/ebooks/ACC" class="collection-item"> Accounting </a>
-        <a href="/ebooks/FIN" class="collection-item"> Finance </a>
-        <a href="/ebooks/MARK" class="collection-item"> Marketing </a>
-        <a href="/ebooks/ENG" class="collection-item"> English </a>
-        <a href="/ebooks/LAW" class="collection-item"> Law </a>
-        <a href="/ebooks/JOUR" class="collection-item"> Journalism </a>
-        <a href="/ebooks/BNG" class="collection-item"> Bangla </a>
-        <a href="/ebooks/ANTHRO" class="collection-item"> Anthropology </a>
-        <a href="/ebooks/ARCH" class="collection-item"> Archeology </a>
-     </ul>
+     <% if (route === 'ebooks') { %>
+      <%# department lists %> 
+      <%- include ('./deptlist') -%> 
+     <% }else { %>
+      <%# department lists %> 
+      <%- include ('./blog_topics') -%> 
+     <% } %> 
   </div>
 </div>

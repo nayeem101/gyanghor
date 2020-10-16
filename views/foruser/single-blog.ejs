@@ -19,7 +19,7 @@
           <p title='Created At'>
             <i class="material-icons">date_range</i> <%= blog.createdAt.toDateString() -%>
           </p>
-          <p title='Category'><i class="material-icons">assignment</i> <%= blog.category -%></p>
+          <p title='Category' style="color: #c7cbda"><i class="material-icons">assignment</i> <%= blog.category -%></p>
 
           <% if (typeof editPost !== 'undefined' && editPost) { %>
             <p style="float: right">
@@ -89,15 +89,15 @@
   });
   let head1 = document.querySelectorAll(".blog-details h1");
   head1.forEach(h1=>{
-     h1.setAttribute("style","font-size:1.7rem !important; margin: .5rem 0; line-height:110%")
+     h1.setAttribute("style","font-size:1.75rem !important; margin: .75rem 0; line-height:110%;color:#ffbf")
   })
   let head2 = document.querySelectorAll(".blog-details h2");
   head2.forEach(h2=>{
-     h2.setAttribute("style","font-size:1.54rem !important; margin: .5rem 0; line-height:110%")
+     h2.setAttribute("style","font-size:1.5rem !important; margin: .65rem 0; line-height:110%;color:#ffcf")
   })
   let head3 = document.querySelectorAll(".blog-details h3");
   head3.forEach(h3=>{
-     h3.setAttribute("style","font-size:1.34rem !important; margin: .5rem 0; line-height:100%")
+     h3.setAttribute("style","font-size:1.35rem !important; margin: .5rem 0; line-height:100%")
   })
   let paragraph = document.querySelectorAll('.blog-details p');
   paragraph.forEach(p=>{
@@ -111,7 +111,7 @@
 
   let containers = document.querySelectorAll('.blog-details div');
   containers.forEach(container=>{
-    container.setAttribute("style","color:#181841;font-size:1.125rem; background: #fefefe; border: 1px solid #cccccc;padding: 5px 10px;")
+    container.setAttribute("style","color:#181841;font-size:1.125rem; background: #fefefe; border: 1px solid #cccccc;padding: 5px 10px;width:max-content")
   })
 
 </script>

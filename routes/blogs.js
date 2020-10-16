@@ -1,5 +1,10 @@
-// router
 const router = require("express").Router();
+
+// html sanitizer
+const createDOMPurify = require("dompurify");
+const { JSDOM } = require("jsdom");
+const window = new JSDOM("").window;
+const DOMPurify = createDOMPurify(window);
 
 //auth
 const { ensureAuth } = require("../config/auth");
@@ -36,6 +41,37 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+//get blogs by category GET /category
+router.get("/category/:name", async (req, res, next) => {
+  const pageNum = parseInt(req.query.page, 10);
+  const category = req.params.name;
+  try {
+    const { docs, page, pages } = await Blogs.paginate(
+      { category },
+      {
+        page: pageNum || 1,
+        limit: 3,
+        sort: { _id: -1 },
+      }
+    );
+
+    //recent posts
+    const recents = await Blogs.find({}, { id: 1, title: 1 }).sort({ _id: -1 }).limit(5);
+    const mostRead = await Blogs.find({}, { id: 1, title: 1 })
+      .sort({ view: -1 })
+      .limit(5);
+
+    const data = { docs, page, pages, recents, mostRead, category };
+
+    if (req.isAuthenticated() && req.user.role === "user")
+      res.render("foruser/blogs", { data, isLogedIn: true, username: req.user.name });
+    else res.render("foruser/blogs", { data, isLogedIn: false });
+  } catch (error) {
+    console.log(error);
+    res.redirect("back");
+  }
+});
+
 //create post GET /create
 router.get("/create", (req, res, next) => {
   if (req.isAuthenticated() && req.user.role === "user") {
@@ -45,20 +81,22 @@ router.get("/create", (req, res, next) => {
   }
 });
 
-//create post GET /create
+//create post POST /create
 router.post("/create", ensureAuth, async (req, res, next) => {
   let { title, category, description, details } = req.body;
   let createdBy = { authorID: req.user.id, author: req.user.name },
     createdAt = new Date().toDateString(),
     view = 0;
-  console.log(createdBy);
+  //sanitize html
+  const cleanDetails = DOMPurify.sanitize(details);
+
   const blog = new Blogs({
     title,
-    category: category.split(","),
+    category,
     description,
     createdBy,
     createdAt,
-    details,
+    details: cleanDetails,
     view,
   });
 
@@ -85,10 +123,7 @@ router.get("/:id", async (req, res, next) => {
   try {
     const blog = await Blogs.findOneAndUpdate({ _id: id }, { $inc: { view: 1 } });
 
-    let similarBlogs = await Blogs.find(
-      { category: { $in: blog.category } },
-      { details: 0 }
-    )
+    let similarBlogs = await Blogs.find({ category: blog.category }, { details: 0 })
       .sort({ _id: -1 })
       .limit(6);
 
@@ -117,11 +152,16 @@ router.get("/:id", async (req, res, next) => {
 router.get("/edit/:id", ensureAuth, async (req, res, next) => {
   const id = req.params.id;
   const currentUserID = req.user.id;
+  console.log(id);
   try {
     const blog = await Blogs.findById(id);
     const { createdBy } = blog;
     if (currentUserID === createdBy.authorID)
-      res.render("foruser/create-blog", { editPost: true, blog, username: req.user.name});
+      res.render("foruser/create-blog", {
+        editPost: true,
+        blog,
+        username: req.user.name,
+      });
     else res.redirect("back");
   } catch (error) {
     console.log(error);
@@ -134,12 +174,14 @@ router.post("/update/:id", ensureAuth, async (req, res, next) => {
   const id = req.params.id;
   let { title, category, description, details } = req.body;
   let createdAt = new Date().toDateString();
+  //sanitize html
+  const cleanDetails = DOMPurify.sanitize(details);
 
   try {
     const result = await Blogs.updateOne(
       { _id: id },
       {
-        $set: { title, category: category.split(","), description, details, createdAt },
+        $set: { title, category, description, details: cleanDetails, createdAt },
       }
     );
     console.log("blog update", {

@@ -73,42 +73,42 @@
 <!-- features -->
 <section class="section section-features center custom-color">
   <div class="container">
-      <h4 class="title-section">Features</h4>
+      <h5 class="white-text"> Features </h5>
       <div class="row white-text">
           <div class="col s12 m4">
-              <div class="card-panel whitish  myCard ">
+              <div class="card-panel whitish mycard">
                   <i class="material-icons medium">book</i>
-                  <h5 class="title-section title-section">eBooks</h5>
+                  <a href='/ebooks' class="title-section" title='visit link'>eBooks</a>
                   <p>Download ebooks of your prefered subjects</p>
               </div>
           </div>
           <div class="col s12 m4">
-              <div class="card-panel whitish myCard">
-                  <i class="material-icons medium">web</i>
-                  <h5 class="title-section">Journals</h5>
+              <div class="card-panel whitish mycard">
+                  <i class="material-icons medium">chrome_reader_mode</i>
+                  <a href='/journals' class="title-section" title='visit link'>Journals</a>
                   <p>Read journals written by CoU Graduates</p>
               </div>
           </div>
           <div class="col s12 m4">
-            <div class="card-panel whitish myCard">
+            <div class="card-panel whitish mycard">
                 <i class="material-icons medium">web</i>
-                <h5 class="title-section">Blogs</h5>
+                <a href='/blogs' class="title-section" title='visit link'>Blogs</a>
                 <p>Read or write blogs about different topics</p>
             </div>
         </div>
       </div>
       <div class="row white-text">
           <div class="col s12 m6">
-            <div class="card-panel whitish myCard">
+            <div class="card-panel whitish mycard">
               <i class="material-icons medium">import_contacts</i>
-              <h5 class="title-section">Research Papers</h5>
+              <a href='/journals' class="title-section" title='visit link'>Research Papers</a>
               <p>Papers from CoU Graduates of many topics</p>
             </div>
           </div>
           <div class="col s12 m6">
-              <div class="card-panel whitish myCard">
+              <div class="card-panel whitish mycard">
                   <i class="material-icons medium">local_library</i>
-                  <h5 class="title-section">Study Materials</h5>
+                  <a href='/study' class="title-section" title='visit link'>Study Materials</a>
                   <p>Get video playlists of subjects & resourceful website links</p>
               </div>
           </div>
@@ -116,6 +116,97 @@
   </div>
 </section>
 
+<!-- testimonial -->
+<section id="testimonial" class="custom-color lighten-1">
+  <div class="container">
+    <h5 class="center white-text"> Testimonials </h5>
+    <div class="slider custom-color lighten-1">
+      <ul class="slides custom-color lighten-1">
+        <li>
+          <div class="testimonial">
+            <div class="side">
+              <img src="/images/couits1.png" alt="Testimonials">
+            </div>
+            <div class="info">
+              <h5 class='testimony'>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minima enim in ex optio ullam, 
+                ratione incidunt eveniet placeat sit, hic explicabo ea doloribus quae.
+              </h5>
+              <h4>Name of Advisor</h4>
+              <h5 class='desig'>Designation</h5>
+              <h5 class='desig'>Department of XYZ</h5>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="testimonial">
+            <div class="side">
+              <img src="/images/couits1.png" alt="Testimonials">
+            </div>
+            <div class="info">
+              <h5 class='testimony'>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, quas ullam? Voluptate vel a sapiente.
+              </h5>
+              <h4>Name of Advisor 2</h4>
+              <h5 class='desig'>Designation 2</h5>
+              <h5 class='desig'>Department of XYZ</h5>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="testimonial">
+            <div class="side">
+              <img src="/images/couits1.png" alt="Testimonials">
+            </div>
+            <div class="info">
+              <h5 class='testimony'>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro neque at doloremque, amet ut maxime fugiat natus libero labore! Et.
+              </h5>
+              <h4>Name of Advisor 3</h4>
+              <h5 class='desig'>Designation 3</h5>
+              <h5 class='desig'>Department of XYZ</h5>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- section: developers -->
+<section class="section section-dev center">
+  <div class='container devs'>
+      <h5 class="white-text">Our Team</h5>
+      <div class="row">
+<% let social1 = {FB:'shihab.uddin17',GH:'Farhashihab',LI:'farhanshihab'} %> 
+<% let social2 = {FB:'nayeemsuchan',GH:'nayeem101',LI:'najmul-islam-nayeem-575081164'} %> 
+<% let social3 = {FB:'akibhasan19',GH:'Akibhasan19',LI:'akib-hasan-3ba4061a3'} %>
+<% let dev1 = {name:'MD. Shihab Uddin', desig:'Team Lead & Mentor', social:social1, img:'/images/persons/shihab.jpeg'} %> 
+<% let dev2 = {name:'Najmul Islam Nayeem', desig:'Web Developer (Full Stack)',social:social2, img:'/images/persons/nayeem.jpg'} %> 
+<% let dev3 = {name:'MD. Akib Hasan', desig:'Graphic Designer & Data Entry',social:social3, img:'/images/persons/akib.jpg'} %> 
+<% let developers = [dev1,dev2,dev3] %>
+        <% for (let dev of developers) { %> 
+          <div class="col s12 m4">
+            <div class="card-panel devcard white-text">
+                <img src="<%= dev.img -%>" alt="Team Member" class="circle responsive-img" />
+                <h5><%= dev.name -%></h5>
+                <h6><%= dev.desig -%></h6>
+                <p>Department: ICT</p>
+                <a href="https://facebook.com/<%= dev.social.FB %>" title='facebook profile' target='_blank' >
+                  <i class="icon-social-facebook"></i>
+                </a>
+                <a href="https://github.com/<%= dev.social.GH %>" title='github profile' target='_blank' >
+                  <i class="icon-social-github"></i>
+                </a>
+                <a href="https://linkedin/in/<%= dev.social.LI %>" title="linkedin profile" target='_blank'>
+                  <i class="icon-social-linkedin"></i>
+                </a>
+            </div>
+          </div>
+        <% } %> 
+      </div>
+  </div>
+</section>
 <%# contact section %> 
 <%- include ('./partials/user_contact') -%> 
 
@@ -137,7 +228,7 @@
             breakpoint: 600,
             settings: {
                slidesToShow: 2,
-               slidesToScroll: 1,
+               slidesToScroll: 2,
                duration: 0.5,
             },
          },
@@ -146,7 +237,7 @@
             breakpoint: 1024,
             settings: {
                slidesToShow: 4,
-               slidesToScroll: 2,
+               slidesToScroll: 4,
                itemWidth: 150,
                duration: 0.5,
             },
@@ -154,6 +245,5 @@
       ],
    });
 </script>
-
 <%# footer %> 
 <%-include ('./layouts/footer') -%>

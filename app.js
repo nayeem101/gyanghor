@@ -1,5 +1,5 @@
 const express = require("express");
-// const morgan = require("morgan");
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 const path = require("path");
 const flash = require("connect-flash");
@@ -27,6 +27,7 @@ mongoose.connect(dburi, {
   useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true,
+  autoIndex: true
 });
 
 const db = mongoose.connection;
@@ -72,8 +73,9 @@ app.use(passport.session());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname + "/views"));
 
-//set public assets
-app.use(express.static(__dirname + "/public", {maxAge: 1000 * 60 * 60 * 24 * 1}));
+//set public assets with cacheisng for 1 day
+// app.use(express.static(__dirname + "/public", {maxAge: 1000 * 60 * 60 * 24 * 1}));
+app.use(express.static(__dirname + "/public"));
 
 //flash msg
 app.use(flash());

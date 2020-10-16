@@ -16,5 +16,5 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'about', groups: [ 'about' ] }
 	];
 	config.height = 350
-	config.removeButtons = 'Language,Outdent,Indent';
+	config.removeButtons = 'Language,Indent,Outdent,Source';
 };

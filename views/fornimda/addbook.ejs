@@ -1,7 +1,5 @@
 <%# header %> 
 <%- include ('../layouts/admin_header',{title:'Admin addebook',user:false}) -%>
-<!-- error message -->
-<%- include ('../partials/message') -%>
 <!-- navbar -->
 <%- include ('../partials/dash_nav') -%>
 
@@ -11,6 +9,8 @@
     <%- include ('../partials/dash_sidebar.ejs') -%>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <!-- error message -->
+      <%- include ('../partials/message') -%>
       <!-- section title -->
       <%- include ('../partials/dash_sec_title.ejs',{title:'Add new Ebook'}) -%>
 
@@ -84,6 +84,31 @@
               />
             </div>
           </div>
+          <div class="row">
+            <div class="col-6">
+              <select class="custom-select" name="semester" id="semester" required>
+                <option selected disabled>Select Semester</option>
+                <option value="first">1st semester</option>
+                <option value="second">2nd semester</option>
+                <option value="third">3rd semester</option>
+                <option value="fourth">4th semester</option>
+                <option value="fifth">5th semester</option>
+                <option value="sixth">6th semester</option>
+                <option value="seventh">7th semester</option>
+                <option value="eighth">8th semester</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="language">Language</label>
+              <input
+                type="text"
+                class="form-control"
+                id="language"
+                name="language"
+                placeholder="enter language name"
+              />
+            </div>
+          </div>
           <div class="form-group">
             <label for="link">Preview Link</label>
             <input
@@ -95,28 +120,16 @@
               required
             />
           </div>
-          <div class="row">
-            <div class="col-8">
-              <label for="dlink">Download Link</label>
-              <input
-                type="text"
-                class="form-control"
-                id="dlink"
-                name="dlink"
-                placeholder="enter link"
-                required
-              />
-            </div>
-            <div class="col-4">
-              <label for="language">Language</label>
-              <input
-                type="text"
-                class="form-control"
-                id="language"
-                name="language"
-                placeholder="enter language name"
-              />
-            </div>
+          <div class="form-group">
+            <label for="dlink">Download Link</label>
+            <input
+              type="text"
+              class="form-control"
+              id="dlink"
+              name="dlink"
+              placeholder="enter link"
+              required
+            />       
           </div>
           <div class="form-group">
             <label for="details">Book Details</label>

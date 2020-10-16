@@ -8,7 +8,7 @@ const blogSchema = new Schema({
     required: true,
     trim: true,
   },
-  category: { type: Array, required: true },
+  category: { type: String, required: true },
   description: {
     type: String,
     required: true,

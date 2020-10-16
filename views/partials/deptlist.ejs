@@ -1,0 +1,17 @@
+<% let Departments = [{"name":"Information & Communication Technology","shortName":"ICT"},
+     {"name":"Computer Science & Engineering","shortName":"CSE"},{"name":"Department of Pharmacy","shortName":"PHARMACY"},
+     {"name":"Department of Mathematics","shortName":"MATH"},{"name":"Department of Physics","shortName":"PHYSICS"},
+     {"name":"Department of Chemistry","shortName":"CHEMISTRY"},
+     {"name":"Department of Statistics","shortName":"STAT"},{"name":"Department of Archaeology","shortName":"ARCHAEOLOGY"},
+     {"name":"Department of Economics","shortName":"ECONOMICS"},{"name":"Public Administration","shortName":"PUBLIC AD"},
+     {"name":"Department of Anthropology","shortName":"ANTHRO"},{"name":"Mass Communication and Journalism","shortName":"MCJ"},
+     {"name":"Management Studies","shortName":"MANAGEMENT"},{"name":"Accounting and Information Systems","shortName":"AIS"},
+     {"name":"Department of Marketing","shortName":"MARKETING"},{"name":"Finance and Banking","shortName":"FINANCE"},
+     {"name":"Department of Law","shortName":"LAW"},{"name":"Department of English","shortName":"ENGLISH"},
+     {"name":"Department of Bangla","shortName":"BANGLA"}]  %> 
+<ul class="collection" id="<%= typeof singlebook !== "undefined" ? 'categorie-lists' : 'categories-list' %>" >
+  <% for (dept of Departments){%>
+    <a href="/<%= route %>/<%= dept.shortName -%>" title="<%= dept.shortName -%>" 
+      class="collection-item"> <%= dept.name -%> </a>
+  <% } %>
+</ul>

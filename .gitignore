@@ -5,3 +5,4 @@ config/keys.js
 api-info.md
 views/admin_layout.ejs
 views/error.ejs
+public/javascripts/ckeditor/samples

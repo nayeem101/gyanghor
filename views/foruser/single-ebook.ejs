@@ -8,6 +8,7 @@
 <!-- main nav -->
 <%- include ('../partials/user_navbar',{route:'ebooks'}) -%> 
 
+   <%#  show modal if not loged in  %> 
 <!-- ebook section-->
 <div class="ebook-container">
   <div id="ebook-single">
@@ -22,18 +23,32 @@
       <p>Pages: <%= ebook.pages %></p>
       <p>Publisher: <%= ebook.publisher %></p>
       <p>Language: <%= ebook.language %></p>
-      <p>
-        Details: <br />
-        <%= ebook.details %>
-      </p>
-      <a href="<%= ebook.link %>" target="_blank" class="btn waves-effect waves-light custom-color lighten-2">
-        Read
-      </a>
-      <a href="<% if (ebook.dlink) { %>
-       <%= ebook.dlink %> 
-      <% } %>" target="_blank" class="btn waves-effect waves-light custom-color lighten-4">
-        Download
-      </a>
+      <p>Details: <br /><%= ebook.details %></p>
+         <% if (isLogedIn) { %>
+         <a <% if (ebook.link) { %> href="<%= ebook.link %>" <% } %>
+            target="_blank" class="btn waves-effect waves-light custom-color lighten-2"
+            >Read</a>
+         <a <% if (ebook.dlink) { %> href="<%= ebook.dlink %>" <% } %>
+            target="_blank" class="btn waves-effect waves-light custom-color lighten-4"
+            >Download</a>
+        <% } else {%>
+         <!-- Modal Trigger -->
+         <button data-target="modal2" 
+          class="btn modal-trigger waves-effect custom-color lighten-2">Read</button>
+         <button data-target="modal2" 
+          class="btn modal-trigger waves-effect custom-color lighten-4">Download</button>
+         <div id="modal2" class="modal custom-color">
+            <div class="modal-content white-text">
+               <h4>You have to log in first</h4>
+               <p>Press okay to go login page</p>
+            </div>
+            <div class="modal-footer custom-color lighten-3" style="text-align: center">
+               <a href="#!" class="modal-close btn-small custom-color lighten-3 white-text">Cancel</a>
+               <a href="/users/login" class="modal-close btn-small custom-color lighten-2 white-text"
+                  title="login">Okay</a>
+            </div>
+         </div>
+        <% } %> 
     </div>
   </div>
   
@@ -42,25 +57,8 @@
     <div class="center categorie-title">
        <h5>Departments</h5>
     </div>
-    <ul class="collection" id="categorie-lists">
-        <a href="/ebooks/ICT" class="collection-item"> ICT </a>
-        <a href="/ebooks/CSE" class="collection-item"> CSE </a>
-        <a href="/ebooks/MATH" class="collection-item"> Mathematics </a>
-        <a href="/ebooks/PHY" class="collection-item"> Physics </a>
-        <a href="/ebooks/CHE" class="collection-item"> Chemistry </a>
-        <a href="/ebooks/PHA" class="collection-item"> Pharmacy </a>
-        <a href="/ebooks/STAT" class="collection-item"> Statstics </a>
-        <a href="/ebooks/ACC" class="collection-item"> Accounting </a>
-        <a href="/ebooks/FIN" class="collection-item"> Finance </a>
-        <a href="/ebooks/MARK" class="collection-item"> Marketing </a>
-        <a href="/ebooks/ENG" class="collection-item"> English </a>
-        <a href="/ebooks/LAW" class="collection-item"> Law </a>
-        <a href="/ebooks/JOUR" class="collection-item"> Journalism </a>
-        <a href="/ebooks/BNG" class="collection-item"> Bangla </a>
-        <a href="/ebooks/ANTHRO" class="collection-item"> Anthropology </a>
-        <a href="/ebooks/ARCH" class="collection-item"> Archeology </a>
-     </ul>
- </div>
+    <%- include ('../partials/deptlist',{singlebook: true, route:'ebooks'}) -%> 
+   </div>
 </div>
 
 <!-- card slider -->
@@ -131,4 +129,4 @@
 </script>
 
 <%# footer %> 
-<%- include ('../layouts/footer') -%> 
+<%- include ('../layouts/footer',{route:'ebooks/singlebook'}) -%> 

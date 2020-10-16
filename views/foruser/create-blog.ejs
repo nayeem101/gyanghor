@@ -8,7 +8,7 @@
     style="background-color: #0b0333 !important">
   <div class="container">
    <a class="navbar-brand" href="/"> 
-    <img src="/images/logo.png" alt="gyanghor" style="width:80px"> জ্ঞানঘর</a>
+    <img src="/images/logo4.png" alt="gyanghor" style="width:80px"> জ্ঞানঘর</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -66,11 +66,22 @@
             <input class='form-control' type="text" name="title" id="title" placeholder="give a title" 
             value="<%= typeof editPost !== 'undefined'? blog.title : '' %>" required />
           </div>
+          <%# categories list %> 
+          <% let Categories = [{name:'Technology'},{name:'Programming'},
+            {name:'Tips & Topics'},{name:'Skill Development'},{name:'History'},
+            {name:'Economy'},{name:'Business Ideas'},{name:'Entrepreneurship'},
+            {name:'Scholarship'},{name:'Others'}]  %> 
 
           <div class="form-group">
-            <label for="category">Blog Category (Comma Separated Value)</label>
-            <input class='form-control' type="text" name="category" id="category" placeholder="ex: category1,category2" 
-            value="<%= typeof editPost !== 'undefined' ? blog.category: '' %>" required />
+            <label for="category">Blog Category (Select one)</label>
+            <select class="form-control" name="category" id="category" required>
+              <% for(let category of Categories) {%>
+                <%if(typeof editPost !== 'undefined' && category.name.toLowerCase() === blog.category){%>
+                  <option value="<%= blog.category %>" selected><%= category.name %></option>
+                <%}%>
+                <option value="<%= category.name.toLowerCase() %>" selected><%= category.name %></option>
+              <% } %>
+            </select>
           </div>
 
           <div class="form-group">

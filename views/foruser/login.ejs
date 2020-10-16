@@ -7,17 +7,13 @@
    <div class="col-md-6 m-auto py-5">
       <div class="card card-body" id="myCard">
          <div class="container text-center">
+            <a href="/"><img src="/images/logo2.png" class="w-25" alt="logo" style="transform:translateX(15%)"></a>
             <h2><a href="/" class="whitish-text" title="home">জ্ঞানঘর</a></h2>
             <h4>জ্ঞানের আলোয় আলোকিত</h4>
          </div>
          <h4 class="text-center"><i class="fas fa-sign-in-alt"></i> Login</h4>
          <%- include ('../partials/message') -%>
-         <form
-            action="/users/login"
-            name="login"
-            method="POST"
-            onsubmit="return vaidation()"
-         >
+         <form action="/users/login" name="login" method="POST" onsubmit="return vaidation()">
             <div class="form-group">
                <label for="email">Email</label>
                <input
@@ -28,8 +24,8 @@
                   placeholder="Enter Email"
                />
             </div>
-            <div class="form-group">
-               <label for="password">Password</label>
+            <label for="password">Password</label>
+            <div class="input-group form-group">
                <input
                   type="password"
                   id="password"
@@ -37,6 +33,9 @@
                   class="form-control"
                   placeholder="Enter Password"
                />
+               <div class='input-group-append'>
+                  <button type='button' class='btn btn-info' id="showpass">Show</button>
+               </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
          </form>
@@ -46,6 +45,13 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.1.0/validator.min.js"></script>
 <script>
+   let showbtn = document.getElementById('showpass');
+   showbtn.addEventListener('click',()=>{
+      let inp = document.getElementById('password');
+      if(inp.type === 'password'){inp.type = 'text';showbtn.innerText = 'Hide'}
+      else {inp.type = 'password';showbtn.innerText = 'Show'}
+   })
+   
    function vaidation() {
       let card = document.getElementById("myCard");
       let form = document.forms["login"];

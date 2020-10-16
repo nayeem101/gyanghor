@@ -10,6 +10,7 @@ const journalSchema = new Schema({
   image: { type: String },
   occupation: { type: String, required: true },
   journalName: { type: String, required: true },
+  description: { type: String, required: true, trim: true },
   journalLink: { type: String, required: true },
   publishedAt: { type: Date, required: true },
   socialLinks: [{ media: String, link: String }],

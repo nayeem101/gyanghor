@@ -4,6 +4,7 @@ const mongoosePaginate = require("mongoose-paginate");
 
 const EbookSchema = new Schema({
   category: Array,
+  semester: { type: String, required: true },
   name: {
     type: String,
     trim: true,
@@ -19,13 +20,17 @@ const EbookSchema = new Schema({
   },
   language: String,
   link: String,
-  dlink:String,
+  dlink: String,
   details: {
     type: String,
     trim: true,
   },
 });
 
+EbookSchema.index({ name: "text" });
+
 EbookSchema.plugin(mongoosePaginate);
 
-module.exports = model("ebooks", EbookSchema);
+const ebookModel = model("ebooks", EbookSchema);
+
+module.exports = ebookModel;

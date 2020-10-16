@@ -1,0 +1,11 @@
+<% let Categories = [{name:'Technology'},{name:'Programming'},
+{name:'Tips & Topics'},{name:'Skill Development'},{name:'History'},
+{name:'Economy'},{name:'Business Ideas'},{name:'Entrepreneurship'},
+{name:'Scholarship'},{name:'Others'}]  %> 
+
+<ul class="collection" id="categories-list" >
+  <% for (categorie of Categories){%>
+    <a href="/blogs/category/<%= categorie.name.toLowerCase() -%>" title="<%= categorie.name.toLowerCase() -%>" 
+      class="collection-item"> <%= categorie.name -%> </a>
+  <% } %>
+</ul>

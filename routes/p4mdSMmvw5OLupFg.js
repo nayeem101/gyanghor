@@ -140,12 +140,13 @@ router.get("/ebook", adminAuth, async (req, res, next) => {
 
 // ebooks -- POST /addebook
 router.post("/addebook", adminAuth, async (req, res, next) => {
-  const { name, writer, pages, publisher, language, link, dlink, details } = req.body;
+  const { name, writer,semester, pages, publisher, language, link, dlink, details } = req.body;
   let category = req.body.category.filter((cat) => cat.length !== 0);
 
   //book obj initilize
   const newEbook = new Ebooks({
     category,
+    semester,
     name,
     writer,
     pages,
@@ -234,6 +235,7 @@ router.post(
       authorBatch,
       occupation,
       journalName,
+      description,
       journalLink,
     } = req.body;
     const publishedAt = Date.now();
@@ -245,7 +247,7 @@ router.post(
       new Date().getTime() + ".jpg"
     );
 
-    let imageLink = "/images/journal/user.svg";
+    let imageLink = "/images/journal/author.png";
 
     if (req.file !== undefined) {
       sharp(req.file.path)
@@ -292,6 +294,7 @@ router.post(
       socialLinks,
       occupation,
       journalName,
+      description,
       journalLink,
       publishedAt,
     });
