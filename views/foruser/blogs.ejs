@@ -35,7 +35,8 @@
   <% } %> 
   </div>
   <!-- all posts -->
-  <h4 class="center-align title-section" style="text-transform: capitalize;"> <%= data.category !== 'undefined' ? data.category : ''%> Blog Posts</h4>
+  <h4 class="center-align title-section" style="text-transform: capitalize;"
+  > <%= typeof data.category !== 'undefined' ? data.category + ' Blog Posts' : 'All Blog Posts'%></h4>
   <div class="container blog-container">
      <div class="blogs">
         <% if (data.docs.length === 0) { %>
@@ -74,7 +75,7 @@
 <%- include ('../partials/user_paginate',{pages: data.pages, page: data.page}) -%> 
 
 <%# contact %>
-<%- include ('../partials/user_contact') -%> 
+<%- include ('../partials/user_contact',{route:'journals'}) -%> 
 
 <%# footer %> 
 <%- include ('../layouts/footer') -%> 

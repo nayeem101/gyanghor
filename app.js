@@ -5,7 +5,7 @@ const path = require("path");
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 
-// require('dotenv').config()
+// require('dotenv').config();
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -73,7 +73,7 @@ app.use(passport.session());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname + "/views"));
 
-//set public assets with cacheisng for 1 day
+//set public assets with cachesing for 1 day
 // app.use(express.static(__dirname + "/public", {maxAge: 1000 * 60 * 60 * 24 * 1}));
 app.use(express.static(__dirname + "/public"));
 

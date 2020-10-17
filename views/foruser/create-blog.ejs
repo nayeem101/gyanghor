@@ -68,7 +68,7 @@
           </div>
           <%# categories list %> 
           <% let Categories = [{name:'Technology'},{name:'Programming'},
-            {name:'Tips & Topics'},{name:'Skill Development'},{name:'History'},
+            {name:'Tips & Tricks'},{name:'Skill Development'},{name:'History'},
             {name:'Economy'},{name:'Business Ideas'},{name:'Entrepreneurship'},
             {name:'Scholarship'},{name:'Others'}]  %> 
 
@@ -79,7 +79,7 @@
                 <%if(typeof editPost !== 'undefined' && category.name.toLowerCase() === blog.category){%>
                   <option value="<%= blog.category %>" selected><%= category.name %></option>
                 <%}%>
-                <option value="<%= category.name.toLowerCase() %>" selected><%= category.name %></option>
+                <option value="<%= category.name.toLowerCase() %>"><%= category.name %></option>
               <% } %>
             </select>
           </div>

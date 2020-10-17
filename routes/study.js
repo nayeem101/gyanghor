@@ -13,7 +13,6 @@ router.get("/", async (req, res, next) => {
       {
         page: pageNum || 1,
         limit: 6,
-        sort: { _id: 1 },
       }
     );
     const { docs, page, pages } = departments;
