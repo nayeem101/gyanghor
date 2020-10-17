@@ -1,5 +1,5 @@
 const express = require("express");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 const mongoose = require("mongoose");
 const path = require("path");
 const flash = require("connect-flash");
