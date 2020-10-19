@@ -74,8 +74,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname + "/views"));
 
 //set public assets with cachesing for 1 day
-// app.use(express.static(__dirname + "/public", {maxAge: 1000 * 60 * 60 * 24 * 1}));
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public", {maxAge: 1000 * 60 * 60 * 24 * 1}));
+// app.use(express.static(__dirname + "/public"));
 
 //flash msg
 app.use(flash());

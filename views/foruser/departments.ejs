@@ -7,11 +7,36 @@
 <%- include ('../partials/user_nav',{isLogedIn}) -%> 
 <!-- main nav -->
 <%- include ('../partials/user_navbar',{route}) -%> 
+<% let Departments = [{"name":"Information & Communication Technology","shortName":"ICT"},
+{"name":"Computer Science & Engineering","shortName":"CSE"},{"name":"Department of Pharmacy","shortName":"PHARMACY"},
+{"name":"Department of Mathematics","shortName":"MATH"},{"name":"Department of Physics","shortName":"PHYSICS"},
+{"name":"Department of Chemistry","shortName":"CHEMISTRY"},
+{"name":"Department of Statistics","shortName":"STAT"},{"name":"Department of Archaeology","shortName":"ARCHAEOLOGY"},
+{"name":"Department of Economics","shortName":"ECONOMICS"},{"name":"Public Administration","shortName":"PUBLIC AD"},
+{"name":"Department of Anthropology","shortName":"ANTHRO"},{"name":"Mass Communication and Journalism","shortName":"MCJ"},
+{"name":"Management Studies","shortName":"MANAGEMENT"},{"name":"Accounting and Information Systems","shortName":"AIS"},
+{"name":"Department of Marketing","shortName":"MARKETING"},{"name":"Finance and Banking","shortName":"FINANCE"},
+{"name":"Department of Law","shortName":"LAW"},{"name":"Department of English","shortName":"ENGLISH"},
+{"name":"Department of Bangla","shortName":"BANGLA"}]  %> 
 
 <!-- ebook container -->
 <section id="study-section">
   <h4 class="center-align title-section"
   ><%= route === 'ebooks' ? 'Ebooks of' : 'Study Materials of' %>  Departments</h4>
+    <%# depts dropdown%>
+    <div class="deptdropdown center-align">
+      <a href="#" class='dropdown-trigger btn custom-color lighten-2 waves-effect' 
+        style="font-size:1.125rem;width:20%;min-width: 200px;" data-target='deptlist'> Select Department 
+        <i class="material-icons" style="vertical-align:bottom;font-size: 2rem;" >arrow_drop_down</i>
+      </a>
+      <ul class="dropdown-content" id="deptlist">
+        <% for(let dept of Departments) {%>
+        <li> <a href="/<%= route %>/<%= dept.shortName %>" 
+          title='<%= dept.shortName %>' style="color: #7fcac9"> <%= dept.name %> </a> </li>
+        <%}%>
+      </ul>
+    </div>
+
   <div class="container departments" >
     <% for(let dept of departments ) { %>
     <div class="department" >

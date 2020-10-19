@@ -1,5 +1,5 @@
 <%# header %> 
-<%- include ('../layouts/header',{title: "Study Materials",route : 'study'}) -%> 
+<%- include ('../layouts/header',{title: "Study Materials",route : 'single-study'}) -%> 
 
 <!-- preloader -->
 <%- include ('../partials/preloader') -%> 
@@ -57,11 +57,13 @@
             </div>
         </div>
         <!-- departments -->
-        <div class="col s12 m4 l3 categories" style="margin-top:1.5rem;padding:0 !important;height:500px">
-            <div class="center categorie-title">
-               <h5>Departments</h5>
-            </div>
-            <%- include ('../partials/deptlist',{singlebook: true, route:'study'}) -%> 
+        <div class="col s12 m4 l3">
+           <div class="categories">
+              <div class="center categorie-title">
+                 <h5>Departments</h5>
+              </div>
+              <%- include ('../partials/deptlist',{singlebook: true, route:'study'}) -%> 
+           </div>
         </div>
       </div>
   </div>

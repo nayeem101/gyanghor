@@ -64,8 +64,8 @@
           <% } %>
         </div>
 
-        <button aria-label="Previous" class="glider-prev">«</button>
-        <button aria-label="Next" class="glider-next">»</button>
+        <button aria-label="Previous" class="glider-prev" title='prev' >«</button>
+        <button aria-label="Next" class="glider-next" title='next' >»</button>
       </div>
     </div>
 </section>
@@ -109,7 +109,7 @@
               <div class="card-panel whitish mycard">
                   <i class="material-icons medium">local_library</i>
                   <a href='/study' class="title-section" title='visit link'>Study Materials</a>
-                  <p>Get video playlists of subjects & resourceful website links</p>
+                  <p>Video Lecture & resourceful website links</p>
               </div>
           </div>
       </div>
@@ -181,8 +181,8 @@
 <% let social1 = {FB:'shihab.uddin17',GH:'Farhashihab',LI:'farhanshihab'} %> 
 <% let social2 = {FB:'nayeemsuchan',GH:'nayeem101',LI:'najmul-islam-nayeem-575081164'} %> 
 <% let social3 = {FB:'akibhasan19',GH:'Akibhasan19',LI:'akib-hasan-3ba4061a3'} %>
-<% let dev1 = {name:'MD. Shihab Uddin', desig:'Team Lead & Mentor', social:social1, img:'/images/persons/shihab.jpeg'} %> 
-<% let dev2 = {name:'Najmul Islam Nayeem', desig:'Web Developer (Full Stack)',social:social2, img:'/images/persons/nayeem.jpg'} %> 
+<% let dev1 = {name:'MD. Shihab Uddin', desig:'Founder & Team Lead', social:social1, img:'/images/persons/shihab.jpeg'} %> 
+<% let dev2 = {name:'Najmul Islam Nayeem', desig:'Full Stack Web Developer',social:social2, img:'/images/persons/nayeem.jpg'} %> 
 <% let dev3 = {name:'MD. Akib Hasan', desig:'Graphic Designer & Data Entry',social:social3, img:'/images/persons/akib.jpg'} %> 
 <% let developers = [dev1,dev2,dev3] %>
         <% for (let dev of developers) { %> 
@@ -227,7 +227,7 @@
             // screens greater than >= 775px
             breakpoint: 600,
             settings: {
-               slidesToShow: 2,
+               slidesToShow: 3,
                slidesToScroll: 2,
                duration: 0.5,
             },
